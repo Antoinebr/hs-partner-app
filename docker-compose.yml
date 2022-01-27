@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  front:
+    image: antoine/partner-app
+    expose:
+    - "80"
+    - "443"
+    networks:
+        - proxy
+        - default
+    labels:
+    - "traefik.enable=true"
+    - "traefik.docker.network=proxy"
+    - "traefik.http.routers.redirects-secure.entrypoints=websecure"
+    - "traefik.http.routers.redirects-secure.rule=Host(`redirects.antoinebrossault.com`)"
+
+networks:
+  proxy:
+    external: true

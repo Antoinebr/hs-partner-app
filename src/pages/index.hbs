@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <!-- 
+      This is the main Handlebars template for the site 
+      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+      - The server script passes data in here and the Handlebars code builds it into the HTML page
+    -->
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{seo.title}}</title>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- This is a handlebars IF statement
+         Checking for a custom "color" parameter from server.js -->
+    {{#if color}} 
+    <!-- If there is a color value, update the style for the page title -->
+    <style>
+      .title {
+        color: {{color}};
+      }
+    </style>
+    {{/if}}    
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        
+        <!-- This is the start of content for our page -->
+        <h1 class="title">Partner's app</h1>
+        
+        
+        <div class="color-form">
+            
+          
+            <p>Find here all the pending requests from our clients </p>
+          
+            <h2>Requests received :</h2>
+           
+            
+          
+
+          
+          {{#if data}}
+              {{#each data}}
+                
+                <article class="deal">
+                  
+                    <p>Type of request : {{this.objectType}}</p>
+                  
+                    <p>Name of the deal:  {{this.properties.dealname.value}}</p>
+                  
+                    <p>Amount:  {{this.properties.amount.value}} € 🤑 </p>
+
+                    <p>Deal Stage :  {{this.properties.dealstage.value}} 💪 </p>  
+
+                    <p>Days needed to close :  {{this.properties.days_to_close.value}} days 🕦 </p>  
+
+                </article>
+
+              {{/each}}
+          {{/if}}
+
+     
+        </div>
+        
+  
+      </div>
+    </div>
+    
+  </body>
+</html>
