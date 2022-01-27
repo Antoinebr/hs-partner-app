@@ -37,7 +37,7 @@ if (seo.url === "glitch-default") {
 }
 
 
-const data = [];
+let data = [];
 
 
 /**
@@ -63,6 +63,14 @@ fastify.get("/", function(request, reply) {
 fastify.get("/hs", function (request, reply) {
   reply.send(data);
 });
+
+fastify.get("/reset", function (request, reply) {
+
+  data = [];
+  reply.send(data);
+});
+
+
 
 fastify.post("/hs", function (request, reply) {
   console.log(request.body);
