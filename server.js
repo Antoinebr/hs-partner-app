@@ -71,6 +71,13 @@ fastify.get("/reset", function (request, reply) {
 });
 
 
+fastify.get("/data", function (request, reply) {
+  
+  reply.send(data);
+});
+
+
+
 
 fastify.post("/hs", function (request, reply) {
   console.log(request.body);
