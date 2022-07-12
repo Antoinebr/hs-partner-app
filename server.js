@@ -55,9 +55,12 @@ const createUser = () =>  {
   const lastname  = faker.name.lastName();
   const avatar =  faker.image.avatar();
   const tokensAvailable =  faker.random.numeric(2);
-  const email  = faker.internet.email(name, lastname );
+  const email  = faker.internet.email(name, lastname ).toLowerCase();
   const carManufacturer = faker.vehicle.manufacturer();
   const carModel = faker.vehicle.model();
+
+  console.log(email.toLowerCase());
+
 
   return {
     name,
@@ -78,6 +81,7 @@ const createUser = () =>  {
 const generateRandomUsers = (numberOfUsersToGenerate) => {
   
   for (let i = 0; i < numberOfUsersToGenerate; i++) { 
+    console.log(createUser());
 
     users.push(createUser());
   }
