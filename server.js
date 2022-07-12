@@ -2,7 +2,9 @@
  * This is the main Node.js server script for your project
  * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
  */
-require('dotenv').config({ path: 'variables.env' });
+require('dotenv').config({
+  path: 'variables.env'
+});
 const path = require("path");
 
 const faker = require("@faker-js/faker").faker;
@@ -44,18 +46,17 @@ let data = [];
 
 
 // hold all the users
-let users = [
-]
+let users = []
 
 
 
-const createUser = () =>  {
+const createUser = () => {
 
-  const name =  faker.name.firstName();
-  const lastname  = faker.name.lastName();
-  const avatar =  faker.image.avatar();
-  const tokensAvailable =  parseInt(faker.random.numeric(2));
-  const email  = faker.internet.email(name, lastname ).toLowerCase();
+  const name = faker.name.firstName();
+  const lastname = faker.name.lastName();
+  const avatar = faker.image.avatar();
+  const tokensAvailable = parseInt(faker.random.numeric(2));
+  const email = faker.internet.email(name, lastname).toLowerCase();
   const carManufacturer = faker.vehicle.manufacturer();
   const carModel = faker.vehicle.model();
 
@@ -79,8 +80,8 @@ const createUser = () =>  {
 
 
 const generateRandomUsers = (numberOfUsersToGenerate) => {
-  
-  for (let i = 0; i < numberOfUsersToGenerate; i++) { 
+
+  for (let i = 0; i < numberOfUsersToGenerate; i++) {
     console.log(createUser());
 
     users.push(createUser());
@@ -90,16 +91,18 @@ const generateRandomUsers = (numberOfUsersToGenerate) => {
 
 
 /**
-* Our home page route
-*
-* Returns src/pages/index.hbs with data built into it
-*/
-fastify.get("/", function(request, reply) {
-  
-  // params is an object we'll pass to our handlebars template
-  let params = { seo: seo };
+ * Our home page route
+ *
+ * Returns src/pages/index.hbs with data built into it
+ */
+fastify.get("/", function (request, reply) {
 
-  
+  // params is an object we'll pass to our handlebars template
+  let params = {
+    seo: seo
+  };
+
+
   // The Handlebars code will be able to access the parameter values and build them into the page
   reply.view("/src/pages/index.hbs", {
     data,
@@ -128,7 +131,7 @@ fastify.get("/resetUsers", function (request, reply) {
 
 
 fastify.get("/data", function (request, reply) {
-  
+
   reply.send(data);
 });
 
@@ -141,9 +144,11 @@ fastify.get("/api/users", function (request, reply) {
 
 fastify.get("/api/user/:email", function (request, reply) {
 
-  const { email } = request.params;
+  const {
+    email
+  } = request.params;
 
-  const user = users.find( user => user.email === email);
+  const user = users.find(user => user.email === email);
 
   console.log(user)
 
@@ -156,8 +161,7 @@ fastify.get("/api/user/:email", function (request, reply) {
 fastify.get("/users", function (request, reply) {
 
 
-  if(users.length === 0) generateRandomUsers(30);
-
+  if (users.length === 0) generateRandomUsers(30);
 
   reply.view("/src/pages/users.hbs", {
     users
@@ -165,6 +169,59 @@ fastify.get("/users", function (request, reply) {
 
 });
 
+
+
+fastify.patch("/api/user", function (request, reply) {
+
+  try {
+
+    console.log(request.body);
+
+    const index = users.findIndex(user => user.email === request.body.email);
+
+    if (index === -1) throw new Error("The user doesn't exist in the list");
+
+    console.log(`${request.body.email} is located at position ${index} `);
+
+    console.log(users[index]);
+
+
+    if (request.body.tokensAvailable !== undefined) {
+      users[index].tokensAvailable = request.body.tokensAvailable;
+    }
+
+
+    if (request.body.carManufacturer !== undefined) {
+      users[index].carManufacturer = request.body.carManufacturer;
+    }
+
+
+    if (request.body.carModel !== undefined) {
+      users[index].carModel = request.body.carModel;
+    }
+
+
+    if (request.body.name !== undefined) {
+      users[index].name = request.body.name;
+    }
+
+
+    if (request.body.lastname !== undefined) {
+      users[index].lastname = request.body.lastname;
+    }
+
+    reply.send(users[index]);
+
+    console.log(users[index]);
+
+  } catch (e) {
+
+
+    reply.status('403').send(e.toString());
+  }
+  
+
+});
 
 
 
@@ -178,8 +235,16 @@ fastify.post("/hs", function (request, reply) {
 
 
 
+
+
+
 // Run the server and report out to the logs
 fastify.listen(process.env.PORT || 8080, "0.0.0.0", function (err, address) {
+
+  if (users.length === 0) generateRandomUsers(30);
+  console.log(users)
+
+
   if (err) {
     fastify.log.error(err);
     process.exit(1);
