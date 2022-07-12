@@ -54,7 +54,7 @@ const createUser = () =>  {
   const name =  faker.name.firstName();
   const lastname  = faker.name.lastName();
   const avatar =  faker.image.avatar();
-  const tokensAvailable =  faker.random.numeric(2);
+  const tokensAvailable =  parseInt(faker.random.numeric(2));
   const email  = faker.internet.email(name, lastname ).toLowerCase();
   const carManufacturer = faker.vehicle.manufacturer();
   const carModel = faker.vehicle.model();
