@@ -5,6 +5,9 @@
 require('dotenv').config({ path: 'variables.env' });
 const path = require("path");
 
+const faker = require("@faker-js/faker").faker;
+
+
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   // Set this to true for detailed logging:
@@ -36,8 +39,50 @@ if (seo.url === "glitch-default") {
   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 }
 
-
+// hold all the data received by the webhooks
 let data = [];
+
+
+// hold all the users
+let users = [
+]
+
+
+
+const createUser = () =>  {
+
+  const name =  faker.name.firstName();
+  const lastname  = faker.name.lastName();
+  const avatar =  faker.image.avatar();
+  const tokensAvailable =  faker.random.numeric(2);
+  const email  = faker.internet.email(name, lastname );
+  const carManufacturer = faker.vehicle.manufacturer();
+  const carModel = faker.vehicle.model();
+
+  return {
+    name,
+    email,
+    lastname,
+    avatar,
+    email,
+    tokensAvailable,
+    carManufacturer,
+    carModel
+  }
+
+}
+
+
+
+
+const generateRandomUsers = (numberOfUsersToGenerate) => {
+  
+  for (let i = 0; i < numberOfUsersToGenerate; i++) { 
+
+    users.push(createUser());
+  }
+
+}
 
 
 /**
@@ -71,9 +116,49 @@ fastify.get("/reset", function (request, reply) {
 });
 
 
+fastify.get("/resetUsers", function (request, reply) {
+
+  users = [];
+  reply.send(users);
+});
+
+
 fastify.get("/data", function (request, reply) {
   
   reply.send(data);
+});
+
+
+
+fastify.get("/api/users", function (request, reply) {
+  reply.send(users);
+});
+
+
+fastify.get("/api/user/:email", function (request, reply) {
+
+  const { email } = request.params;
+
+  const user = users.find( user => user.email === email);
+
+  console.log(user)
+
+  reply.send(user);
+});
+
+
+
+
+fastify.get("/users", function (request, reply) {
+
+
+  if(users.length === 0) generateRandomUsers(30);
+
+
+  reply.view("/src/pages/users.hbs", {
+    users
+  });
+
 });
 
 

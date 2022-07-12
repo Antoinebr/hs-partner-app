@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <!-- 
+      This is the main Handlebars template for the site 
+      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+      - The server script passes data in here and the Handlebars code builds it into the HTML page
+    -->
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{seo.title}}</title>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- This is a handlebars IF statement
+         Checking for a custom "color" parameter from server.js -->
+    {{#if color}} 
+    <!-- If there is a color value, update the style for the page title -->
+    <style>
+      .title {
+        color: {{color}};
+      }
+    </style>
+    {{/if}}    
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        
+        <!-- This is the start of content for our page -->
+        <h1 class="title">User list</h1>
+        
+        
+        <div class="color-form">
+            
+            
+          {{#if users}}
+              {{#each users}}
+                
+     
+                <article class="deal">
+
+                    <img src="{{this.avatar}}" alt="">
+                  
+                    <p>Name : {{this.name}}</p>
+                  
+                    <p>Lastname :  {{this.lastname}}</p>
+
+                    <p>email :  {{this.email}} </p>
+
+                    <p>Token availables :  {{this.tokensAvailable}}  </p>
+
+                    <p>carManufacturer :  {{this.carManufacturer}}  </p>  
+
+                    <p>Car Model : {{this.carModel}} </p>
+
+                  
+
+                </article>
+
+              {{/each}}
+          {{/if}}
+
+     
+        </div>
+        
+  
+      </div>
+    </div>
+    
+  </body>
+</html>
