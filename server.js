@@ -210,7 +210,7 @@ fastify.patch("/api/user", async function (request, reply) {
 
     
     // if the request doesn't come from HubSpot let's update the record by calling the HubSpot API 
-   if(request.body.fromHs !== undefined && request.body.tokensAvailable !== undefined){
+   if(request.body.fromHs == false && request.body.tokensAvailable !== undefined){
 
 
       const searchResult = await hsApi.getContactIdFromEmail(request.body.email);
