@@ -6,8 +6,9 @@ require('dotenv').config({
   path: 'variables.env'
 });
 const path = require("path");
-
 const faker = require("@faker-js/faker").faker;
+
+const hsApi = require('./controllers/hsAPIctrl');
 
 
 // Require the fastify framework and instantiate it
@@ -60,9 +61,6 @@ const createUser = () => {
   const carManufacturer = faker.vehicle.manufacturer();
   const carModel = faker.vehicle.model();
 
-  console.log(email.toLowerCase());
-
-
   return {
     name,
     email,
@@ -82,8 +80,6 @@ const createUser = () => {
 const generateRandomUsers = (numberOfUsersToGenerate) => {
 
   for (let i = 0; i < numberOfUsersToGenerate; i++) {
-    console.log(createUser());
-
     users.push(createUser());
   }
 
@@ -171,7 +167,7 @@ fastify.get("/users", function (request, reply) {
 
 
 
-fastify.patch("/api/user", function (request, reply) {
+fastify.patch("/api/user", async function (request, reply) {
 
   try {
 
@@ -185,6 +181,8 @@ fastify.patch("/api/user", function (request, reply) {
 
     console.log(users[index]);
 
+
+    if(typeof request.body.tokensAvailable !== "number") throw new Error("You can't set tokensAvailable with a type which is not a number ");
 
     if (request.body.tokensAvailable !== undefined) {
       users[index].tokensAvailable = request.body.tokensAvailable;
@@ -210,6 +208,33 @@ fastify.patch("/api/user", function (request, reply) {
       users[index].lastname = request.body.lastname;
     }
 
+    
+    // if the request doesn't come from HubSpot let's update the record by calling the HubSpot API 
+   if(request.body.fromHs !== undefined && request.body.tokensAvailable !== undefined){
+
+
+      const searchResult = await hsApi.getContactIdFromEmail(request.body.email);
+
+      if(!searchResult.data && searchResult.data.results.length === -1) throw new Error(`Coulnd't find the contact`);
+      
+      const firstRecordFound = searchResult.data.results[0];
+      
+      console.log(firstRecordFound);
+
+      const updateResults = await hsApi.updateContactByContactId(firstRecordFound.id,{
+        "properties": {
+          "tokens_available" : request.body.tokensAvailable
+        }
+      });
+
+      console.log(updateResults.data)
+
+  }
+
+
+
+    // Send back the updated record 
+
     reply.send(users[index]);
 
     console.log(users[index]);
@@ -219,7 +244,7 @@ fastify.patch("/api/user", function (request, reply) {
 
     reply.status('403').send(e.toString());
   }
-  
+
 
 });
 
@@ -242,7 +267,7 @@ fastify.post("/hs", function (request, reply) {
 fastify.listen(process.env.PORT || 8080, "0.0.0.0", function (err, address) {
 
   if (users.length === 0) generateRandomUsers(30);
-  console.log(users)
+
 
 
   if (err) {
@@ -252,3 +277,6 @@ fastify.listen(process.env.PORT || 8080, "0.0.0.0", function (err, address) {
   console.log(`Your app is listening on ${address}`);
   fastify.log.info(`server listening on ${address}`);
 });
+
+
+
