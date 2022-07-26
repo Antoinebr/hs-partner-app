@@ -108,6 +108,27 @@ fastify.get("/", function (request, reply) {
 
 
 
+fastify.get("/editUser/:email", function (request, reply) {
+
+  // params is an object we'll pass to our handlebars template
+  let params = {
+    seo: seo
+  };
+
+  const {
+    email
+  } = request.params;
+
+  const user = users.find(user => user.email === email);
+
+  reply.view("/src/pages/form.hbs", {
+    user,
+    seo
+  });
+
+});
+
+
 fastify.get("/hs", function (request, reply) {
   reply.send(data);
 });
@@ -241,7 +262,7 @@ fastify.patch("/api/user", async function (request, reply) {
 
   } catch (e) {
 
-
+    console.log(e);
     reply.status('403').send(e.toString());
   }
 
