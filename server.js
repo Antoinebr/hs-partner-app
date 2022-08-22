@@ -173,6 +173,19 @@ fastify.get("/api/user/:email", function (request, reply) {
 });
 
 
+fastify.get("/api/user/", function (request, reply) {
+
+  if(request.query.email === undefined) throw new Error(`Email needs to be set, we recieved  ${typeof request.query.email}`)
+
+
+  const user = users.find(user => user.email === request.query.email);
+  
+  reply.send(user);
+
+});
+
+
+
 
 
 fastify.get("/users", function (request, reply) {

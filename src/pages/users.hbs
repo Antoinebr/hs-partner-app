@@ -70,7 +70,12 @@
                     <p>Car Model : {{this.carModel}} </p>
 
                   
-                  <p> <a href="/editUser/{{this.email}}">Edit</a></p>
+                  <a href="/editUser/{{this.email}}">Edit</a> <br/>
+
+                   <a href="/api/user/{{this.email}}">API endpoint without query string</a> <br/>
+
+                  <a href="/api/user/?email={{this.email}}">API endpoint with query string</a>
+                  
                 </article>
 
               {{/each}}
