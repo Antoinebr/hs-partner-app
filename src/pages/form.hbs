@@ -1,129 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-    <!-- 
-      This is the main Handlebars template for the site 
-      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
-      - The server script passes data in here and the Handlebars code builds it into the HTML page
-    -->
-    
-    <meta charset="utf-8" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>{{seo.title}}</title>
-    
-    <!-- Meta tags for SEO and social sharing -->
-    <link rel="canonical" href="{{seo.url}}">
-    <meta name="description" content="{{seo.description}}">
-    <meta property="og:title" content="{{seo.title}}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{{seo.url}}">
-    <meta property="og:description" content="{{seo.description}}">
-    <meta property="og:image" content="{{seo.image}}">
-    <meta name="twitter:card" content="summary">
+<head>
 
-    <!-- Import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+  <meta charset="utf-8" />
 
-    <!-- This is a handlebars IF statement
-         Checking for a custom "color" parameter from server.js -->
-    {{#if color}} 
-    <!-- If there is a color value, update the style for the page title -->
-    <style>
-      .title {
-        color: {{color}};
-      }
-    </style>
-    {{/if}}    
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="content" role="main">
-        
-        <!-- This is the start of content for our page -->
-        <h1 class="title">Edit a user</h1>
-        
-        
-        <div class="color-form">
-            
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>{{seo.title}}</title>
+
+  <!-- Meta tags for SEO and social sharing -->
+  <link rel="canonical" href="{{seo.url}}">
+  <meta name="description" content="{{seo.description}}">
+  <meta property="og:title" content="{{seo.title}}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{seo.url}}">
+  <meta property="og:description" content="{{seo.description}}">
+  <meta property="og:image" content="{{seo.image}}">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Import the webpage's stylesheet -->
+
+
+
+</head>
+
+<body>
+
+  <div class="container mx-auto">
+
+    <div class="bg-white h-5/5 px-2 lg:px-9 py-9">
+
+
+
+      <p class="text-4xl font-light ">Edit {{user.name}} 's account </p>
+
+      <p class="text-4xl font-bold pb-4">And sync the changes to HubSpot</p>
+
+
+
+      <p class="text-gray-500"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Te cum vivendum explicate abhorrent. Id venom argumentum vel. Ut lorem bocent hendrerit eam. </p>
+
+
+      <div class="w-full max-w-xs mt-6">
+
+
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+             Email
+            </label>
+            <input
+              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
+          </div>
+
+
+
+
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
+              Lastname
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}" disabled>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+              First name
+            </label>
+            <input
+              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="name" type="text" placeholder="Your name" value="{{user.name}}" disabled>
+          </div>
           
-            <p>Edit a user </p>
 
 
 
-            <form>
-                
-
-                <label for="email">email</label>
-                <br/>
-                <input type="email" name="email" id="email" value="{{user.email}}">
-                <br/>
-
-                <label for="name">Name</label>
-                <br/>
-                <input type="text" name="name" value="{{user.name}}">
-
-                
-                
-                <br/>
-                <label for="lastname">Lastname</label>
-                <br/>
-                <input type="text" name="lastname" value="{{user.lastname}}">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">
+           Tokens Availables
+            </label>
+            <input
+              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
+          </div>
 
 
-                <br/>
-                <label for="tokensavailable">tokensAvailable</label>
-                <br/>
-                <input type="number" id="tokensavailable" name="tokensavailable" value="{{user.tokensAvailable}}">
-                
-                   <br/>
-                <button id="editBtn"> Edit </button>
-            </form>
-          
+
+    
+
+          <div class="flex items-center justify-between">
+            <button
+              id="editBtn"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button">
+              Update
+            </button>
+          </div>
+        </form>
    
-            <script>
-                
-
-                document.querySelector('#editBtn').addEventListener('click',async e => {
-
-                    e.preventDefault();
-
-                    console.log(document.querySelector('#tokensavailable').value);  
-                    
-                    const newTokenValue = document.querySelector('#tokensavailable').value;
-
-
-                    const email = document.querySelector('#email').value;
-
-
-                    const res = await fetch('/api/user', {
-                        method: 'PATCH',
-                        body: JSON.stringify({
-                            email,
-                            tokensAvailable: parseInt(newTokenValue),
-                            fromHs:false
-                        }),
-                        headers: {
-                            'Content-type': 'application/json; charset=UTF-8',
-                        },
-                    }).catch(console.log);
+      </div>
 
 
 
 
 
 
-                })
+    </div>
+
+  </div>
 
 
-            </script>
-            
-          
 
-          
-          {{!-- {{#if data}}
+
+
+
+
+
+
+  <div class="wrapper">
+    <div class="content" role="main">
+
+
+
+
+      <script>
+        document.querySelector('#editBtn').addEventListener('click', async e => {
+
+          e.preventDefault();
+
+          console.log(document.querySelector('#tokensavailable').value);
+
+          const newTokenValue = document.querySelector('#tokensavailable').value;
+
+
+          const email = document.querySelector('#email').value;
+
+
+          const res = await fetch('/api/user', {
+            method: 'PATCH',
+            body: JSON.stringify({
+              email,
+              tokensAvailable: parseInt(newTokenValue),
+              fromHs: false
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          }).catch(console.log);
+
+
+
+
+
+
+        })
+      </script>
+
+
+
+
+      {{!-- {{#if data}}
               {{#each data}}
                 
                 {{data}}
@@ -144,12 +187,13 @@
               {{/each}}
           {{/if}} --}}
 
-     
-        </div>
-        
-  
-      </div>
+
     </div>
-    
-  </body>
+
+
+  </div>
+  </div>
+
+</body>
+
 </html>

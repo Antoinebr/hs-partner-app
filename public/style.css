@@ -208,3 +208,20 @@ h2 {
   box-shadow: 1px 4px 9px 1px #00000087;
   margin-top: 2rem;
 }
+
+
+.users{
+
+}
+
+.users article{
+  background-color:white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 1px 4px 9px 1px #00000087;
+  margin-top: 2rem;
+}
+
+.bg-pink {
+  background-color: #ff78b3;
+}

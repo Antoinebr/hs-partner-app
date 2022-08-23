@@ -9,7 +9,7 @@
     -->
     
     <meta charset="utf-8" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/default.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{{seo.title}}</title>
@@ -27,16 +27,6 @@
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
 
-    <!-- This is a handlebars IF statement
-         Checking for a custom "color" parameter from server.js -->
-    {{#if color}} 
-    <!-- If there is a color value, update the style for the page title -->
-    <style>
-      .title {
-        color: {{color}};
-      }
-    </style>
-    {{/if}}    
   </head>
   <body>
     <div class="wrapper">
