@@ -54,7 +54,7 @@
             {{#if users}}
             {{#each users}}
 
-            <article class="h-96 filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
+            <article class="h-100 filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
               <div
                 style="background-image:url( {{this.avatar}} );background-position: center center; background-repeat: no-repeat;background-size: cover;"
                 class="h-48 mb-3"></div>
@@ -66,6 +66,8 @@
                 <p class="text-xs mt-3 mb-2"> <span class="font-bold">Car Driven : </span> {{this.carManufacturer}} </p>
                 <p class="text-xs mt-3 mb-2"> <span class="font-bold">Car Model : </span> {{this.carModel}}</p>
                 <p class="text-xs text-gray-500 text-right"><a href="/editUser/{{this.email}}">Edit</a></p>
+                <p class="text-xs text-gray-500 text-right"><a href="/api/user/{{this.email}}">API endpoint</a></p>
+                <p class="text-xs text-gray-500 text-right"><a href="/api/user/?email={{this.email}}">API w query params</a></p>
               </div>
             </article>
 

@@ -5,6 +5,13 @@
 require('dotenv').config({
   path: 'variables.env'
 });
+
+
+
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./db/db.sql');
+
+
 const path = require("path");
 const faker = require("@faker-js/faker").faker;
 
@@ -47,7 +54,7 @@ let data = [];
 
 
 // hold all the users
-let users = []
+let users = require('./users.json');
 
 
 
@@ -175,11 +182,11 @@ fastify.get("/api/user/:email", function (request, reply) {
 
 fastify.get("/api/user/", function (request, reply) {
 
-  if(request.query.email === undefined) throw new Error(`Email needs to be set, we recieved  ${typeof request.query.email}`)
+  if (request.query.email === undefined) throw new Error(`Email needs to be set, we recieved  ${typeof request.query.email}`)
 
 
   const user = users.find(user => user.email === request.query.email);
-  
+
   reply.send(user);
 
 });
@@ -216,7 +223,7 @@ fastify.patch("/api/user", async function (request, reply) {
     console.log(users[index]);
 
 
-    if(typeof request.body.tokensAvailable !== "number") throw new Error("You can't set tokensAvailable with a type which is not a number ");
+    if (typeof request.body.tokensAvailable !== "number") throw new Error("You can't set tokensAvailable with a type which is not a number ");
 
     if (request.body.tokensAvailable !== undefined) {
       users[index].tokensAvailable = request.body.tokensAvailable;
@@ -242,28 +249,28 @@ fastify.patch("/api/user", async function (request, reply) {
       users[index].lastname = request.body.lastname;
     }
 
-    
+
     // if the request doesn't come from HubSpot let's update the record by calling the HubSpot API 
-   if(request.body.fromHs == false && request.body.tokensAvailable !== undefined){
+    if (request.body.fromHs == false && request.body.tokensAvailable !== undefined) {
 
 
       const searchResult = await hsApi.getContactIdFromEmail(request.body.email);
 
-      if(!searchResult.data && searchResult.data.results.length === -1) throw new Error(`Coulnd't find the contact`);
-      
+      if (!searchResult.data && searchResult.data.results.length === -1) throw new Error(`Coulnd't find the contact`);
+
       const firstRecordFound = searchResult.data.results[0];
-      
+
       console.log(firstRecordFound);
 
-      const updateResults = await hsApi.updateContactByContactId(firstRecordFound.id,{
+      const updateResults = await hsApi.updateContactByContactId(firstRecordFound.id, {
         "properties": {
-          "tokens_available" : request.body.tokensAvailable
+          "tokens_available": request.body.tokensAvailable
         }
       });
 
       console.log(updateResults.data)
 
-  }
+    }
 
 
 
@@ -284,6 +291,12 @@ fastify.patch("/api/user", async function (request, reply) {
 
 
 
+
+
+
+
+
+
 fastify.post("/hs", function (request, reply) {
   console.log(request.body);
 
@@ -293,6 +306,28 @@ fastify.post("/hs", function (request, reply) {
 });
 
 
+
+
+fastify.get("/api/siret", function (request, reply) {
+
+
+  if (request.query.domainName === undefined) throw new Error(`domainName needs to be set, we recieved  ${typeof request.query.domainName}`)
+
+
+  const solvabiliteValues = ["Tres Bonne", "Bonne", "Moyenne"];
+
+
+  const siren = {
+    domainName: request.query.domainName,
+    siret: faker.datatype.number({
+      min: 200000000000001,
+      max: 900000000000001
+    }),
+    solvabilite: solvabiliteValues[Math.floor(Math.random() * 3)]
+  }
+
+  reply.send(siren);
+});
 
 
 
@@ -310,7 +345,7 @@ fastify.listen(process.env.PORT || 8080, "0.0.0.0", function (err, address) {
   }
   console.log(`Your app is listening on ${address}`);
   fastify.log.info(`server listening on ${address}`);
+
+
+
 });
-
-
-

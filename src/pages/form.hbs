@@ -7,6 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/app.js" defer></script>
 
   <title>{{seo.title}}</title>
 
@@ -58,9 +59,6 @@
               id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
           </div>
 
-
-
-
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
               Lastname
@@ -80,20 +78,13 @@
           </div>
           
 
-
-
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">
-           Tokens Availables
-            </label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
             <input
               class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
           </div>
 
-
-
-    
 
           <div class="flex items-center justify-between">
             <button
@@ -103,11 +94,10 @@
               Update
             </button>
           </div>
+
         </form>
    
       </div>
-
-
 
 
 
@@ -130,62 +120,10 @@
 
 
 
-      <script>
-        document.querySelector('#editBtn').addEventListener('click', async e => {
-
-          e.preventDefault();
-
-          console.log(document.querySelector('#tokensavailable').value);
-
-          const newTokenValue = document.querySelector('#tokensavailable').value;
-
-
-          const email = document.querySelector('#email').value;
-
-
-          const res = await fetch('/api/user', {
-            method: 'PATCH',
-            body: JSON.stringify({
-              email,
-              tokensAvailable: parseInt(newTokenValue),
-              fromHs: false
-            }),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-            },
-          }).catch(console.log);
+  
 
 
 
-
-
-
-        })
-      </script>
-
-
-
-
-      {{!-- {{#if data}}
-              {{#each data}}
-                
-                {{data}}
-                <article class="deal">
-                  
-                    <p>Type of request : {{this.objectType}}</p>
-                  
-                    <p>Name of the deal:  {{this.properties.dealname.value}}</p>
-                  
-                    <p>Amount:  {{this.properties.amount.value}} € 🤑 </p>
-
-                    <p>Deal Stage :  {{this.properties.dealstage.value}} 💪 </p>  
-
-                    <p>Days needed to close :  {{this.properties.days_to_close.value}} days 🕦 </p>  
-
-                </article>
-
-              {{/each}}
-          {{/if}} --}}
 
 
     </div>

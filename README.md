@@ -1,7 +1,7 @@
 # deploy
 
 
-connect to : sshOvh2
+connct to : sshOvh2
 
 - send everything to GitHub
 - On the server ``` docker-compose stop ``` 
