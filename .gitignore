@@ -14,3 +14,8 @@ variables.env.now
 .sass-cache 
 
 # Project specific
+
+
+dbManager.js
+garages.json
+users.json
