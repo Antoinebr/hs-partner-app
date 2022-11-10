@@ -10,28 +10,27 @@ const createUser = () => {
     const email = faker.internet.email(name, lastname).toLowerCase();
     const carManufacturer = faker.vehicle.manufacturer();
     const carModel = faker.vehicle.model();
-  
+
     return {
-      name,
-      email,
-      lastname,
-      avatar,
-      email,
-      tokensAvailable,
-      carManufacturer,
-      carModel
+        name,
+        email,
+        lastname,
+        avatar,
+        email,
+        tokensAvailable,
+        carManufacturer,
+        carModel
     }
-  
-  }
-  
-  
-  
-  
-  const generateRandomUsers = (numberOfUsersToGenerate) => {
-  
+
+}
+
+
+
+
+const generateRandomUsers = (numberOfUsersToGenerate) => {
+
     for (let i = 0; i < numberOfUsersToGenerate; i++) {
-      users.push(createUser());
+        users.push(createUser());
     }
-  
-  }
-  
+
+}

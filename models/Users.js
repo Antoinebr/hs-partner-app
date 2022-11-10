@@ -1,14 +1,10 @@
-const {
-    PromisedDatabase
-} = require("promised-sqlite3"); // import the class
+const { PromisedDatabase } = require("promised-sqlite3"); // import the class
 const db = new PromisedDatabase(); // create a instance of PromisedDatabase
 db.open("./db/db.sqlite");
 
 
 
 exports.insertUser = async (user) => {
-
-
 
     if (typeof user !== "object") throw new console.error(`user has to be an object`);
 
@@ -30,8 +26,6 @@ exports.insertUser = async (user) => {
 
 exports.createUserTable = async () => {
 
-
-
     const query = `
         CREATE TABLE Users 
             ( 
@@ -45,7 +39,6 @@ exports.createUserTable = async () => {
                 carModel  VARCHAR(100)  NOT NULL
             );
         `;
-
 
     return await db.run(query);
 
@@ -67,14 +60,11 @@ exports.getUser = async (email) => {
         $email: email
     });
 
-
-
     return result;
 }
 
 
 exports.updateUser = async (user) => {
-
 
     const update = await db.run(`
     

@@ -23,15 +23,11 @@ const axiosConfig = {
 exports.getContactIdFromEmail = async (email) => {
 
 
-
-
-
     if (!email) throw new Error(`an email is required to search in the HubSpot portal`)
 
     if (typeof email !== "string") throw new Error(`Email has to be a string`)
 
     if (!privateAppToken) throw new Error(`There's not API key setup`);
-
 
 
     const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/search`;

@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 require('dotenv').config({
-  path: '../variables.env'
+    path: '../variables.env'
 });
 
 const apiKey = process.env.HAPIKEY;
@@ -14,24 +14,24 @@ const apiKey = process.env.HAPIKEY;
  */
 exports.getContactIdFromEmail = async (email) => {
 
-  if (!email) throw new Error(`an email is required to search in the HubSpot portal`)
+    if (!email) throw new Error(`an email is required to search in the HubSpot portal`)
 
-  if (typeof email !== "string") throw new Error(`Email has to be a string`)
+    if (typeof email !== "string") throw new Error(`Email has to be a string`)
 
-  if (!apiKey) throw new Error(`There's not API key setup`);
+    if (!apiKey) throw new Error(`There's not API key setup`);
 
 
-  const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/search?hapikey=${apiKey} `;
+    const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/search?hapikey=${apiKey} `;
 
-  return axios.post(endpoint, {
-    "filterGroups": [{
-      "filters": [{
-        "value": email,
-        "propertyName": "email",
-        "operator": "EQ"
-      }]
-    }]
-  });
+    return axios.post(endpoint, {
+        "filterGroups": [{
+            "filters": [{
+                "value": email,
+                "propertyName": "email",
+                "operator": "EQ"
+            }]
+        }]
+    });
 
 
 }
@@ -58,11 +58,11 @@ curl --request PATCH \
 */
 exports.updateContactByContactId = (contactId, properties) => {
 
-  if (!apiKey) throw new Error(`There's not API key setup`);
+    if (!apiKey) throw new Error(`There's not API key setup`);
 
-  const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}?hapikey=${apiKey}`;
+    const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}?hapikey=${apiKey}`;
 
 
-  console.log(properties);
-  return axios.patch(endpoint, properties);
+    console.log(properties);
+    return axios.patch(endpoint, properties);
 }
