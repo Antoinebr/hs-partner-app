@@ -4,6 +4,14 @@
 connct to : sshOvh2
 
 - send everything to GitHub
-- On the server ``` docker-compose stop ``` 
+
+On the server : 
+
+```
+Make update
+```
+
+- ``` git pull origin master ```
+- ``` docker-compose stop ``` 
 - ``` make build ```
 - ``` docker-compose up -d ```
