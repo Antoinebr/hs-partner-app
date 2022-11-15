@@ -12,8 +12,8 @@ services:
     labels:
     - "traefik.enable=true"
     - "traefik.docker.network=proxy"
-    - "traefik.http.routers.redirects-secure.entrypoints=websecure"
-    - "traefik.http.routers.redirects-secure.rule=Host(`redirects.antoinebrossault.com`)"
+    - "traefik.http.routers.partner-app-secure.entrypoints=websecure"
+    - "traefik.http.routers.partner-app-secure.rule=Host(`partner-app.antoinebrossault.com`)"
 
 networks:
   proxy:
