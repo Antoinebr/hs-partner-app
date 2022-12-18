@@ -8,11 +8,23 @@ document.querySelector('#editBtn').addEventListener('click', async e => {
 
     const email = document.querySelector('#email').value;
 
+    const name = document.querySelector('#name').value;
+
+    const lastname = document.querySelector('#lastname').value;
+
+    const carModel = document.querySelector('#carmodel').value;
+
+    const carManufacturer = document.querySelector('#carmanufacturer').value;
+
     const res = await fetch('/api/user', {
         method: 'PATCH',
         body: JSON.stringify({
             email,
+            name,
+            lastname,
             tokensAvailable: parseInt(newTokenValue),
+            carManufacturer,
+            carModel,
             fromHs: false
         }),
         headers: {
