@@ -39,6 +39,15 @@ exports.getAllusers = async () => {
 
 
 
+exports.removeUser = async (email) => {
+
+    if (!email || email === "") throw new Error("You can't remove a user without providing a user email ");
+
+    const user = await Users.destroyUser(email)
+
+    return user;
+}
+
 exports.getUser = async (email) => {
 
     if (typeof email !== "string") throw new Error(`We exepected a string as email, we go ${email}`);

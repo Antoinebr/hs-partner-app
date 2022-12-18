@@ -93,6 +93,19 @@ fastify.get("/api/user/:email", async (request, reply) => {
 });
 
 
+fastify.delete("/api/user/:email", async (request, reply) => {
+
+  const {
+    email
+  } = request.params;
+
+  const user = await usersCtrl.removeUser(email);
+
+  reply.send(user);
+});
+
+
+
 
 
 fastify.get("/api/user/", async (request, reply) => {

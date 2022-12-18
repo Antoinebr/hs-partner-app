@@ -63,6 +63,15 @@ exports.getUser = async (email) => {
     return result;
 }
 
+exports.destroyUser = async (email) => {
+
+    const result = await db.get("DELETE FROM Users WHERE email = $email", {
+        $email: email
+    });
+
+    return result;
+}
+
 
 exports.updateUser = async (user) => {
 
