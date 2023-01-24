@@ -59,9 +59,9 @@
 
                 <div class="bg-white h-5/5 px-9 py-9">
 
-                    <p class="text-4xl font-light ">My list of users</p>
+                    <p class="text-4xl font-light ">Customer Service</p>
 
-                    <p class="text-4xl font-bold pb-4">From my own software / Database </p>
+                    <p class="text-4xl font-bold pb-4">Do you need help ? </p>
 
                     <p class="leading-8 text-gray-500 mt-8"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum
                         apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Lorem ipsum dolor sit
@@ -69,36 +69,19 @@
                         deterruisset te qui.Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel
                         vide saltando vituperata, sonet quidam deterruisset te qui.Lorem ipsum dolor sit met.</p>
 
-
-                    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-20 mt-10">
-
-                        {{#if users}}
-                            {{#each users}}
-
-                                <article class="h-100 filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
-                                    <div style="background-image:url( {{this.avatar}} );background-position: center center; background-repeat: no-repeat;background-size: cover;" class="h-48 mb-3"></div>
-                                    <div class="content px-4">
-                                        <p class="text-l font-bold mt-3 mb-2">{{this.name}} {{this.lastname}}</p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Email : </span>{{this.email}} </p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Token Availables : </span>
-                                            {{this.tokensAvailable}} </p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Car Driven : </span> {{this.carManufacturer}} </p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Car Model : </span> {{this.carModel}}</p>
-                                        <p class="text-xs text-gray-500 text-right"><a href="/editUser/{{this.email}}">Edit</a></p>
-                                        <p class="text-xs text-gray-500 text-right"><a href="/api/user/{{this.email}}">API endpoint</a></p>
-                                        <p class="text-xs text-gray-500 text-right"><a href="/api/user/?email={{this.email}}">API w query params</a></p>
-                                    </div>
-                                </article>
-
-                            {{/each}}
-                        {{/if}}
-
-                    </section>
-
-
-
-
                 </div>
+
+
+                <section class="px-9 py-9">
+                    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                    <script>
+                        hbspt.forms.create({
+                            region: "na1",
+                            portalId: "21250603",
+                            formId: "eda04a6a-7cba-43a7-a028-d18cc04878f0"
+                        });
+                    </script>
+                </section>
 
 
             </div>
@@ -108,5 +91,12 @@
     </div>
 
 </body>
+
+
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/21250603.js"></script>
+<!-- End of HubSpot Embed Code -->
+
 
 </html>

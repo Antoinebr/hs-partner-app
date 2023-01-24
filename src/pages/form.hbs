@@ -7,7 +7,12 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <style>pre code{font-size: 0.9em!important;}</style>
   <script src="/app.js" defer></script>
+
 
   <title>{{seo.title}}</title>
 
@@ -114,6 +119,75 @@
         </form>
    
       </div>
+
+
+
+
+<pre><code class="language-javascript">
+
+const axios = require("axios");
+
+const privateAppToken = process.env.privateAppToken;
+
+
+const axiosConfig = {
+    headers: {
+        authorization: `Bearer ${privateAppToken}`
+    }
+};
+
+
+
+/**
+ * 
+ * @param {string} email 
+ * @returns {Promise}
+ */
+exports.getContactIdFromEmail = async (email) => {
+
+
+    if (!email) throw new Error(`an email is required to search in the HubSpot portal`)
+
+    if (typeof email !== "string") throw new Error(`Email has to be a string`)
+
+    if (!privateAppToken) throw new Error(`There's not API key setup`);
+
+
+    const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/search`;
+
+    const searchResult = await axios.post(endpoint, {
+        "filterGroups": [{
+            "filters": [{
+                "value": email,
+                "propertyName": "email",
+                "operator": "EQ"
+            }]
+        }]
+    },axiosConfig);
+
+
+    if (!searchResult.data && searchResult.data.results.length === -1) throw new Error(`Coulnd't find the contact`);
+
+
+    return searchResult.data;
+
+
+}
+
+
+exports.updateContactByContactId = async (contactId, properties) => {
+
+    if (!privateAppToken) throw new Error(`There's not privateAppToken setup`);
+
+    const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`;
+
+    return await axios.patch(endpoint, properties,axiosConfig);
+}
+
+
+
+
+  </code></pre>
 
 
 

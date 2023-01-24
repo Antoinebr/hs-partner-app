@@ -36,6 +36,10 @@ fastify.register(require("point-of-view"), {
 const seo = require("./src/seo.json");
 
 
+
+
+
+
 fastify.get("/", function (request, reply) {
 
   // params is an object we'll pass to our handlebars template
@@ -45,12 +49,21 @@ fastify.get("/", function (request, reply) {
 
 
   // The Handlebars code will be able to access the parameter values and build them into the page
-  reply.view("/src/pages/index.hbs", {
+  reply.view("/src/pages/home.hbs", {
     data: [],
     seo
   });
 });
 
+
+
+
+fastify.get("/customer-service", function (request, reply) {
+  // The Handlebars code will be able to access the parameter values and build them into the page
+  reply.view("/src/pages/customer-service.hbs", {
+    data: [],
+  });
+});
 
 
 fastify.get("/editUser/:email", async (request, reply) => {

@@ -34,3 +34,7 @@ document.querySelector('#editBtn').addEventListener('click', async e => {
 
 
 });
+
+
+
+if (document.querySelector('code')) hljs.highlightAll();
