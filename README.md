@@ -15,3 +15,9 @@ Make update
 - ``` docker-compose stop ``` 
 - ``` make build ```
 - ``` docker-compose up -d ```
+
+
+### ServiceHub 
+
+It's possible to identify the connected user by sending his email address to the HubSpot API and get a token back : 
+https://developers.hubspot.com/docs/api/conversation/visitor-identification

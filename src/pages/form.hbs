@@ -3,30 +3,34 @@
 
 <head>
 
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-  <style>pre code{font-size: 0.9em!important;}</style>
-  <script src="/app.js" defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <style>
+        pre code {
+            font-size: 0.9em !important;
+        }
+    </style>
+    <script src="/app.js" defer></script>
 
 
-  <title>{{seo.title}}</title>
+    <title>{{seo.title}}</title>
 
-  <!-- Meta tags for SEO and social sharing -->
-  <link rel="canonical" href="{{seo.url}}">
-  <meta name="description" content="{{seo.description}}">
-  <meta property="og:title" content="{{seo.title}}">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="{{seo.url}}">
-  <meta property="og:description" content="{{seo.description}}">
-  <meta property="og:image" content="{{seo.image}}">
-  <meta name="twitter:card" content="summary">
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
 
-  <!-- Import the webpage's stylesheet -->
+    <!-- Import the webpage's stylesheet -->
 
 
 
@@ -34,96 +38,109 @@
 
 <body>
 
-  <div class="container mx-auto">
 
-    <div class="bg-white h-5/5 px-2 lg:px-9 py-9">
+    <!-- Menu -->
+    <header class="border-b h-10 pt-2">
 
+        <div class="container mx-auto flex items-center">
+            <div>
+                <a href="/" class="font-bold text-blue">Partner<span class="font-normal">App</span></a>
+            </div>
 
+            <ul class="flex ml-auto">
+                <li>
+                    <a href="/users" class="pr-4"> Users </a>
+                </li>
+                <li>
+                    <a href="/customer-service" class="pr-4"> Customer service </a>
+                </li>
+                <li>
+                    <a href="https://partner-app-customer-portal.antoinebrossault.com/tickets-view" class="pr-4">Opened tickets</a>
+                </li>
+                <li>
+                    <a href="https://partner-app-customer-portal.antoinebrossault.com/knowledge" class="pr-4">Knowlege base</a>
+                </li>
+            </ul>
+        </div>
 
-      <p class="text-4xl font-light ">Edit {{user.name}} 's account </p>
-
-      <p class="text-4xl font-bold pb-4">And sync the changes to HubSpot</p>
-
-
-
-      <p class="text-gray-500"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Te cum vivendum explicate abhorrent. Id venom argumentum vel. Ut lorem bocent hendrerit eam. </p>
-
-
-      <div class="w-full max-w-xs mt-6">
-
-
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-             Email
-            </label>
-            <input
-              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
-              Lastname
-            </label>
-            <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}" disabled>
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-              First name
-            </label>
-            <input
-              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="name" type="text" placeholder="Your name" value="{{user.name}}" disabled>
-          </div>
-          
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Model</label>
-            <input
-              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="carmodel" type="text" placeholder="Car Model" value="{{user.carModel}}" disabled>
-          </div>
+    </header>
 
 
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Manufacturer</label>
-            <input
-              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="carmanufacturer" type="text" placeholder="Car Manufacturer" value="{{user.carManufacturer}}" disabled>
-          </div>
+    <div class="container mx-auto">
 
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
-            <input
-              class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
-          </div>
-
-
-          <div class="flex items-center justify-between">
-            <button
-              id="editBtn"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button">
-              Update
-            </button>
-          </div>
-
-        </form>
-   
-      </div>
+        <div class="bg-white h-5/5 px-2 lg:px-9 py-9">
 
 
 
+            <p class="text-4xl font-light ">Edit {{user.name}} 's account </p>
 
-<pre><code class="language-javascript">
+            <p class="text-4xl font-bold pb-4">And sync the changes to HubSpot</p>
+
+
+
+            <p class="text-gray-500"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Te cum vivendum explicate abhorrent. Id venom argumentum vel. Ut lorem bocent hendrerit eam. </p>
+
+
+            <div class="w-full max-w-xs mt-6">
+
+
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                            Email
+                        </label>
+                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
+                            Lastname
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}" disabled>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                            First name
+                        </label>
+                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" value="{{user.name}}" disabled>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Model</label>
+                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmodel" type="text" placeholder="Car Model" value="{{user.carModel}}" disabled>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Manufacturer</label>
+                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmanufacturer" type="text" placeholder="Car Manufacturer" value="{{user.carManufacturer}}" disabled>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
+                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
+                    </div>
+
+
+                    <div class="flex items-center justify-between">
+                        <button id="editBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                            Update
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+
+            <pre><code class="language-javascript">
 
 const axios = require("axios");
 
@@ -192,35 +209,35 @@ exports.updateContactByContactId = async (contactId, properties) => {
 
 
 
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-
-
-  <div class="wrapper">
-    <div class="content" role="main">
-
-
-
-
-  
-
-
-
-
+        </div>
 
     </div>
 
 
-  </div>
-  </div>
+
+
+
+
+
+
+
+    <div class="wrapper">
+        <div class="content" role="main">
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+    </div>
 
 </body>
 
