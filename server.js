@@ -6,7 +6,7 @@ const path = require("path");
 const siretCtrl = require('./controllers/siretCtrl');
 const usersCtrl = require('./controllers/usersCtrl.js');
 const hubSpotAPI = require('./apis/hubSpot')
-
+const fs = require('fs');
 
 const fastify = require("fastify")({
   // Set this to true for detailed logging:
@@ -25,10 +25,14 @@ fastify.register(require("fastify-static"), {
 fastify.register(require("fastify-formbody"));
 
 
+const handlebars = require("handlebars");
+
+handlebars.registerPartial('menu', fs.readFileSync(path.join(__dirname, '/src/pages/partials/menu.hbs'), 'utf8'));
+
 // point-of-view is a templating manager for fastify
 fastify.register(require("point-of-view"), {
   engine: {
-    handlebars: require("handlebars")
+    handlebars
   }
 });
 
