@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- 
+      This is the main Handlebars template for the site 
+      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+      - The server script passes data in here and the Handlebars code builds it into the HTML page
+    -->
+
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{seo.title}}</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+</head>
+
+<body>
+
+
+    <!-- Menu -->
+    {{> menu }}
+    <!-- Menu -->
+
+
+    <div class="wrapper">
+        <div class="content" role="main">
+
+            <!-- This is the start of content for our page -->
+
+            <div class="container mx-auto">
+
+                <div class="bg-white h-5/5 px-9 py-9">
+
+                    <p class="text-4xl font-light ">About us</p>
+
+                    <p class="text-4xl font-bold pb-4">Hand in hand for our customer</p>
+
+                    <p class="leading-8 text-gray-500 mt-8"> At our company, we understand that great customer support is the backbone of a successful business. </p>
+
+                    <br />
+
+                    <p class="text-gray-500"> This page shows a CSAT popup</p>
+
+
+                    <br />
+
+
+                    <p class="text-gray-500">
+                        At our company, we understand that great customer support is the backbone of a successful business. </p>
+
+
+                    <br />
+
+
+                    <p class="text-gray-500">
+                        That's why we are committed to providing the best possible service to all of our customers, no matter what their needs may be. Our goal is to make your experience with our SaaS products as seamless and enjoyable as possible.
+
+                        Our dedicated support team is comprised of experts who are passionate about helping you achieve your goals. They are available around the clock to assist you with any questions or concerns you may have. Whether you're just starting out with our products or have been using them for a while, we're here to support you every step of the way.
+
+                        We believe that great customer support starts with clear and effective communication. </p>
+
+
+                    <br />
+
+                    <p class="text-gray-500"> That's why we use multiple channels, including phone, email, live chat, and a comprehensive knowledge base, to make it easy for you to reach us and get the help you need. We understand that time is precious, so we aim to respond to all customer inquiries as quickly as possible.
+
+                        We also know that technology can be complex and that sometimes things can go wrong. </p>
+
+                    <br />
+                    <p class="text-gray-500">
+
+                        That's why our support team is equipped with the latest tools and knowledge to resolve any technical issues you may encounter. We understand that downtime can be costly, so we work hard to resolve any issues as quickly as possible to minimize any disruption to your business.
+
+                        At our company, customer satisfaction is our number one priority. We believe that by providing the best possible customer support, we can help you achieve your goals and make the most of our SaaS products. So if you're looking for a reliable and supportive partner to help you succeed, look no further. We're here to help you every step of the way.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+
+
+<!-- footer -->
+{{> footer }}
+<!-- footer -->
+
+</html>

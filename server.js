@@ -80,6 +80,16 @@ fastify.get("/contact", function (request, reply) {
 });
 
 
+
+
+fastify.get("/about", function (request, reply) {
+  // The Handlebars code will be able to access the parameter values and build them into the page
+  reply.view("/src/pages/about.hbs", {
+    data: [],
+  });
+});
+
+
 fastify.get("/editUser/:email", async (request, reply) => {
 
   // params is an object we'll pass to our handlebars template
