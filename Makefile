@@ -6,6 +6,4 @@ run:
 
 update:
 	git pull origin master
-	docker-compose stop
-	make build
-	docker-compose up -d
+	forever restart server.js
