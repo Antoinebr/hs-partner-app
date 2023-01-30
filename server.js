@@ -15,6 +15,8 @@ const fastify = require("fastify")({
 
 // ADD FAVORITES ARRAY VARIABLE FROM TODO HERE
 
+
+
 // Setup our static files
 fastify.register(require("fastify-static"), {
   root: path.join(__dirname, "public"),
@@ -28,6 +30,7 @@ fastify.register(require("fastify-formbody"));
 const handlebars = require("handlebars");
 
 handlebars.registerPartial('menu', fs.readFileSync(path.join(__dirname, '/src/pages/partials/menu.hbs'), 'utf8'));
+handlebars.registerPartial('footer', fs.readFileSync(path.join(__dirname, '/src/pages/partials/footer.hbs'), 'utf8'));
 
 // point-of-view is a templating manager for fastify
 fastify.register(require("point-of-view"), {
@@ -51,7 +54,6 @@ fastify.get("/", function (request, reply) {
     seo: seo
   };
 
-
   // The Handlebars code will be able to access the parameter values and build them into the page
   reply.view("/src/pages/home.hbs", {
     data: [],
@@ -65,6 +67,14 @@ fastify.get("/", function (request, reply) {
 fastify.get("/customer-service", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   reply.view("/src/pages/customer-service.hbs", {
+    data: [],
+  });
+});
+
+
+fastify.get("/contact", function (request, reply) {
+  // The Handlebars code will be able to access the parameter values and build them into the page
+  reply.view("/src/pages/contact.hbs", {
     data: [],
   });
 });
