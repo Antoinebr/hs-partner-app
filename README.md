@@ -1,11 +1,10 @@
 # deploy
 
 
-connct to : sshOvh2
 
 - send everything to GitHub
 
-On the server : 
+On the server ovh3 : 
 
 ```
 Make update

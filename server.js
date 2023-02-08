@@ -82,6 +82,9 @@ fastify.get("/contact", function (request, reply) {
 
 
 
+
+
+
 fastify.get("/about", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   reply.view("/src/pages/about.hbs", {
@@ -205,6 +208,14 @@ fastify.patch("/api/user", async function (request, reply) {
 
 });
 
+
+fastify.get('/force-sync-to-hubspot', async (request, reply) => {
+
+  const syncResult = await hubSpotAPI.syncTheDBwithHubspot('antoinebrossault@gmail.com');
+
+  return syncResult;
+
+});
 
 
 

@@ -1,4 +1,5 @@
 const axios = require("axios");
+const Users = require('../models/Users');
 
 require('dotenv').config({
     path: '../variables.env'
@@ -40,7 +41,7 @@ exports.getContactIdFromEmail = async (email) => {
                 "operator": "EQ"
             }]
         }]
-    },axiosConfig);
+    }, axiosConfig);
 
 
     if (!searchResult.data && searchResult.data.results.length === -1) throw new Error(`Coulnd't find the contact`);
@@ -75,10 +76,52 @@ exports.updateContactByContactId = async (contactId, properties) => {
 
     const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`;
 
-    return await axios.patch(endpoint, properties,axiosConfig);
+    return await axios.patch(endpoint, properties, axiosConfig);
 }
 
 
 
+/**
+ * Goal : Keep HubSpot data and this app in sync
+ * How I'm gonna use this feature : When a new version of this app is deployed, it will : 
+ * 
+ */
+exports.syncTheDBwithHubspot = async () => {
+
+    // Get All the contacts from the DB 
+
+    const allContacts = await Users.getUsers();
+
+    const contactUpdated = [];
+
+    // Loop all the contacts 
+    for (const contact of allContacts) {
+
+        // Find the contact ID in HubSpot from the email
+        const hubSpotContact = await this.getContactIdFromEmail(contact.email);
+
+        // test if the contact exists in HubSpot otherwise don't do anything
+        if (hubSpotContact.total === 1) {
+
+            const { id, properties } = hubSpotContact.results[0];
+
+            // @todo check if properties are differents from what we already have in the DB
+
+            const res = await this.updateContactByContactId(id, {
+                "properties": {
+                    carmanufacturer: contact.carManufacturer,
+                    car_model: contact.carModel,
+                    tokens_available: contact.tokensAvailable,
+                }
+            }).catch(error => console.error(error));
+
+            contactUpdated.push(res.data);
+        
+        }
 
 
+    }
+
+    return contactUpdated;
+
+}
