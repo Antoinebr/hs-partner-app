@@ -125,3 +125,11 @@ exports.syncTheDBwithHubspot = async () => {
     return contactUpdated;
 
 }
+
+
+exports.syncTestWithHubSpot = async () => {
+
+    // carey85@gmail.com
+
+
+}

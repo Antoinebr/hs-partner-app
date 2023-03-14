@@ -218,6 +218,24 @@ fastify.get('/force-sync-to-hubspot', async (request, reply) => {
 });
 
 
+/*
+*
+* The idea for this route is to check if the API connection between this App and HubSpot is working
+*
+*/
+fastify.get('/test-sync-with-hubspot', async (request, reply) => {
+
+  // Generate a random number for token available
+
+  const syncResult = await hubSpotAPI.syncTheDBwithHubspot('antoinebrossault@gmail.com');
+
+  return syncResult;
+
+});
+
+
+
+
 
 fastify.get("/api/siret", (request, reply) => reply.send(siretCtrl.createSirenData(request.query.domainName)));
 
