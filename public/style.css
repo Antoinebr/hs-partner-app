@@ -144,3 +144,8 @@ h2 {
   animation: bounce 15s infinite;
 
 }
+
+
+button{
+  border: none;
+}
