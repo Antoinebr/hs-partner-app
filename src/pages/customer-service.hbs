@@ -1,98 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
+    <head>
 
-    <!-- 
-      This is the main Handlebars template for the site 
-      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
-      - The server script passes data in here and the Handlebars code builds it into the HTML page
-    -->
+        <!-- 
+        This is the main Handlebars template for the site 
+        - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+        - The server script passes data in here and the Handlebars code builds it into the HTML page
+        -->
 
-    <meta charset="utf-8" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>{{seo.title}}</title>
-
-    <!-- Meta tags for SEO and social sharing -->
-    <link rel="canonical" href="{{seo.url}}">
-    <meta name="description" content="{{seo.description}}">
-    <meta property="og:title" content="{{seo.title}}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{{seo.url}}">
-    <meta property="og:description" content="{{seo.description}}">
-    <meta property="og:image" content="{{seo.image}}">
-    <meta name="twitter:card" content="summary">
-
-</head>
-
-<body>
+        <meta charset="utf-8" />
+        <link rel="icon" href="https://glitch.com/favicon.ico" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-    <!-- Menu -->
-    {{> menu }}
-    <!-- Menu -->
+        <title>{{seo.title}}</title>
+
+        <!-- Meta tags for SEO and social sharing -->
+        <link rel="canonical" href="{{seo.url}}">
+        <meta name="description" content="{{seo.description}}">
+        <meta property="og:title" content="{{seo.title}}">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="{{seo.url}}">
+        <meta property="og:description" content="{{seo.description}}">
+        <meta property="og:image" content="{{seo.image}}">
+        <meta name="twitter:card" content="summary">
+        <link rel="stylesheet" href="style.css">
+        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+
+    </head>
+
+    <body>
 
 
-    <div class="wrapper">
-        <div class="content" role="main">
+        <!-- Menu -->
+        {{> menu }}
+        <!-- Menu -->
 
-            <!-- This is the start of content for our page -->
 
-            <div class="container mx-auto">
+        <div class="wrapper">
+            <div class="content" role="main">
 
-                <div class="bg-white h-5/5 px-9 py-9">
+                <!-- This is the start of content for our page -->
 
-                    <p class="text-4xl font-light ">Customer Service /</p>
+                <div class="container mx-auto">
 
-                    <p class="text-4xl font-bold pb-1">Do you need help ? </p>
+                    <div class="bg-white h-5/5 px-9 py-9">
+
+                        <p class="text-4xl font-light ">Customer Service /</p>
+
+                        <p class="text-4xl font-bold pb-1">Do you need help ? </p>
+
+                    </div>
+
+                    <section class="px-9 flex flex-row">
+
+                        <section class="pr-8">
+                            <p class="text-gray-500 mb-8"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
+                                Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
+                                This is pretty cool and this shows how powerful can be service hub.
+                            </p>
+
+                            <p class="text-gray-500 mb-8"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
+                                Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
+                                This is pretty cool and this shows how powerful can be service hub.
+                            </p>
+
+                            <p class="text-gray-500"> This form submission is set to create a ticket</p>
+                        </section>
+
+                        {{!-- <section class="pl-8">
+                            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                            <script>
+                                hbspt.forms.create({
+                                    region: "na1",
+                                    portalId: "21250603",
+                                    formId: "eda04a6a-7cba-43a7-a028-d18cc04878f0"
+                                });
+                            </script>
+                        </section> --}}
+
+                    </section>
+                </div>
+
+
+
+
+                <div class="container mx-auto">
+
+
+                    <section class="px-9 flex flex-row">
+
+                        <section class="basis-1/3 pr-8">
+                            <button id="generalQuestion" class="form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">I have a general question </button>
+                        </section>
+
+                        <section class="basis-1/3 pr-8">
+                            <button id="productIssue" class="form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl"> I have a product Issue </button>
+                        </section>
+
+                        <section class="basis-1/3 pr-8">
+                            <button id="billingIssue" class="form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">I have a billing Issue </button>
+                        </section>
+
+                    </section>
+
+
+                    <hr/ class="m-10">
+
+
+                    <div class="h-100 pt-8">
+
+                        <section class="w-1/3 m-auto hidden" id="generalQuestionForm">
+
+                            <p class="text-2xl font-bold pb-1">General question : </p>
+
+                            <p class="text-sm text-gray-500"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
+                                Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
+                                This is pretty cool and this shows how powerful can be service hub.
+                            </p>
+
+                            <hr/ class="m-10">
+
+                            <script>
+                                hbspt.forms.create({
+                                    region: "na1",
+                                    portalId: "21250603",
+                                    formId: "f7484d5b-bdb5-4111-9fbc-e409b91aaf82"
+                                });
+                            </script>
+
+                        </section>
+
+
+                        <section class="w-1/3 m-auto hidden" id="productIssueForm">
+                            <p class="text-2xl font-bold pb-1">Product Issue : </p>
+
+                            <p class="text-sm text-gray-500"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
+                                Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
+                                This is pretty cool and this shows how powerful can be service hub.
+                            </p>
+
+                            <hr/ class="m-10">
+
+                            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+
+
+
+                            <script>
+                                hbspt.forms.create({
+                                    region: "na1",
+                                    portalId: "21250603",
+                                    formId: "eda04a6a-7cba-43a7-a028-d18cc04878f0"
+                                });
+                            </script>
+                        </section>
+
+
+                        <section class="w-1/3 m-auto hidden" id="billingIssueForm">
+                            <p class="text-2xl font-bold pb-1">Billing Issue : </p>
+
+                            <p class="text-sm text-gray-500"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
+                                Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
+                                This is pretty cool and this shows how powerful can be service hub.
+                            </p>
+
+                            <hr/ class="m-10">
+
+                            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                            <script>
+                                hbspt.forms.create({
+                                    region: "na1",
+                                    portalId: "21250603",
+                                    formId: "27a7ba3d-4ac9-419f-9ebe-dca9f69157a2"
+                                });
+                            </script>
+
+                        </section>
+
+                    </div>
+
 
                 </div>
 
-                <section class="px-9 flex flex-row">
-
-                    <section class="basis-1/2 pr-8">
-                        <p class="leading-8 text-gray-500"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
-                            Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
-                            This is pretty cool and this shows how powerful can be service hub.
-                        </p>
-                        </br></br>
-                        <p class="leading-8 text-gray-500"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
-                            Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
-                            This is pretty cool and this shows how powerful can be service hub.
-                        </p>
-                        </br></br>
-                        <p class="text-gray-500"> This form submission is set to create a ticket</p>
-                    </section>
-
-                    <section class="pl-8">
-                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-                        <script>
-                            hbspt.forms.create({
-                                region: "na1",
-                                portalId: "21250603",
-                                formId: "eda04a6a-7cba-43a7-a028-d18cc04878f0"
-                            });
-                        </script>
-                    </section>
-
-                </section>
 
 
             </div>
-
-
         </div>
-    </div>
 
-</body>
-
+    </body>
 
 
-<!-- footer -->
-{{> footer }}
-<!-- footer -->
 
-</html>
+    <!-- footer -->
+    {{> footer }}
+    <!-- footer -->
+
+    </html>
