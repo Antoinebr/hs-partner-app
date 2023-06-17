@@ -67,7 +67,7 @@ document.querySelector('#generalQuestion')?.addEventListener('click', async e =>
     if( document.querySelector('#generalQuestionForm').classList.contains('hidden') === false ){
 
         document.getElementById("generalQuestionForm").scrollIntoView({
-            block: 'start',
+            block: 'nearest',
             behavior: 'smooth',
             inline: 'start'
         });
@@ -89,7 +89,7 @@ document.querySelector('#productIssue')?.addEventListener('click', async e => {
     if( document.querySelector('#productIssueForm').classList.contains('hidden') === false ){
 
         document.getElementById("productIssueForm").scrollIntoView({
-            block: 'start',
+            block: 'nearest',
             behavior: 'smooth',
             inline: 'start'
         });
@@ -110,7 +110,7 @@ document.querySelector('#billingIssue')?.addEventListener('click', async e => {
     if( document.querySelector('#billingIssueForm').classList.contains('hidden') === false ){
 
         document.getElementById("billingIssueForm").scrollIntoView({
-            block: 'start',
+            block: 'nearest',
             behavior: 'smooth',
             inline: 'start'
         });
