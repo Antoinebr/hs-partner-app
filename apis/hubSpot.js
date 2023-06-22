@@ -133,3 +133,64 @@ exports.syncTestWithHubSpot = async () => {
 
 
 }
+
+
+exports.getAllTickets = async () => {
+
+    
+    const response = await axios.post('https://api.hubspot.com/crm/v3/objects/tickets/search', {
+      filterGroups: [
+        {
+          filters: [
+            {
+                propertyName: 'hs_ticket_requester_email',
+                operator: 'EQ',
+                value: 'abrossault@hubspot.com'
+            }
+          ]
+        }
+      ],
+      "properties": [
+        "name"
+    ],
+    }, axiosConfig).catch(console.log)
+
+    // Le tableau de tickets en statut "open" pour le contact spécifié se trouve dans response.data.results
+    const openTickets = response.data.results;
+    console.log(openTickets);
+
+    return openTickets;
+
+}
+
+
+exports.displayAllTickets = async () => {
+
+
+   console.log('llll'); 
+
+        const apiUrl = `https://api.hubapi.com/crm/v3/objects/tickets?limit=100&archived=false`;
+    
+   
+          const response = await axios.get(apiUrl,
+            {
+                headers: {
+                    authorization: `Bearer ${process.env.privateAppTokenPartner}`
+                }
+            }
+          ).catch(console.log);
+    
+          const { results, paging } = response.data;
+
+
+          const ticketContent = [];
+
+          for( const result of results){
+            ticketContent.push(result.properties) 
+          }
+
+
+        return ticketContent;
+    
+ 
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- 
+      This is the main Handlebars template for the site 
+      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+      - The server script passes data in here and the Handlebars code builds it into the HTML page
+    -->
+
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{seo.title}}</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+</head>
+
+<body>
+
+
+    <!-- Menu -->
+    {{> menu }}
+    <!-- Menu -->
+
+
+    <div class="wrapper">
+        <div class="content" role="main">
+
+            <!-- This is the start of content for our page -->
+
+            <div class="container mx-auto">
+
+                <div class="bg-white h-5/5 px-9 py-9">
+
+                    <p class="text-4xl font-light ">All tickets</p>
+
+                    <p class="text-4xl font-bold pb-4"> your requests </p>
+
+                    <p class="leading-8 text-gray-500 mt-8"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum
+                        apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Lorem ipsum dolor sit
+                        met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel vide saltando vituperata, sonet quidam
+                        deterruisset te qui.Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel
+                        vide saltando vituperata, sonet quidam deterruisset te qui.Lorem ipsum dolor sit met.</p>
+
+
+                    <section class="grid grid-cols-1 gap-2 mt-10">
+
+                        {{#if tickets}}
+                            {{#each tickets}}
+
+                    
+                                <article class="filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
+                                    
+                                    <div class="content px-4">
+                                        <p class="text-l font-bold mt-3 mb-2">{{this.subject}}</p>
+                                        <p class="text-xs mt-3 mb-2"> {{{this.content}}}</p>
+                                        <p class="text-xs mt-3 mb-2">{{this.hs_ticket_category}}</p>
+                                    </div>
+                                </article>
+
+                            {{/each}}
+                        {{/if}}
+
+                    </section>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+  <!-- footer -->
+    {{> footer }}
+    <!-- footer -->
+</html>

@@ -241,6 +241,45 @@ fastify.get("/api/siret", (request, reply) => reply.send(siretCtrl.createSirenDa
 
 
 
+
+fastify.get('/mytickets/', async(request, reply) =>{
+
+  const tickets = await hubSpotAPI.displayAllTickets();
+
+  reply.view("/src/pages/tickets.hbs", {
+    tickets
+  });
+
+});
+
+
+fastify.get("/api/parcelNumber/", async (request, reply) => {
+
+  if (request.query.parcelNumber === undefined) throw new Error(`parcelNumber needs to be set, we recieved  ${typeof request.query.parcelNumber}`)
+
+  const originalDate = new Date();
+
+  // Add two days to the original date
+  const newDate = new Date(originalDate);
+  newDate.setDate(originalDate.getDate() + 2);
+
+  // Format the new date as YYYY-MM-DD
+  const formattedDate = newDate.toISOString().split('T')[0];
+
+  const parcelNumber = {
+    status : 'sent',
+    eta : formattedDate
+  }
+
+  reply.send(parcelNumber);
+
+});
+
+
+
+
+
+
 // Run the server and report out to the logs
 fastify.listen(process.env.PORT || 8080, "0.0.0.0", function (err, address) {
 
