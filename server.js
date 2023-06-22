@@ -277,6 +277,24 @@ fastify.get("/api/parcelNumber/", async (request, reply) => {
 
 
 
+fastify.get("/api/getOOOstatus/", async (request, reply) => {
+
+
+  const ooo = [{
+    name : "Antoine",
+    email : "antoine@gmail.com",
+    ooo : true
+  },
+  {
+  name : "Marc",
+  email : "mard@gmail.com",
+  ooo : true
+  }];
+
+  reply.send(ooo);
+
+});
+
 
 
 
