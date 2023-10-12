@@ -1,5 +1,14 @@
+require('dotenv').config({
+    path: 'variables.env'
+});
+  
 const Users = require('../models/Users');
 
+const hubSpotAPI = require('../apis/hubSpot.js');
+
+
+
+  
 
 
 exports.updateUser = async (user) => {
@@ -54,5 +63,46 @@ exports.getUser = async (email) => {
 
     const user = await Users.getUser(email);
 
+    if(!user) throw new Error(`No user found for ${email}`);
+
     return user;
+}
+
+exports.addUser = async (user) => {
+
+
+    if (!user) throw new Error(`There's no user`);
+
+    user.avatar = (!user.avatar || user.avatar.trimStart()  === "") ? `img/males/${Math.floor(Math.random() * 24) + 1}.jpg` : user.avatar;
+
+    console.log( user.avatar)
+    const requiredKeys = ['name', 'lastname', 'email', 'avatar', 'tokensAvailable', 'carManufacturer', 'carModel'];
+
+    for (const key of requiredKeys) {
+        if (!user[key] || user[key] === null) {
+            throw new Error(`Key '${key}' is missing or null in the user object.`);
+        }
+    }
+
+
+    const userAdded = await Users.insertUser(user);
+
+    if(userAdded){
+        
+        const insertion = await hubSpotAPI.addContact({
+            properties: {
+                email: user.email,
+                lastname: user.lastname,
+                firstname: user.name,
+                carmanufacturer : user.carManufacturer,
+                car_model : user.carModel,
+                tokens_available : user.tokensAvailable
+            },
+        }).catch(console.log)
+
+        console.log('User added in HubSpot');
+    }
+
+    return userAdded;
+
 }

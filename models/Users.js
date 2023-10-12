@@ -49,7 +49,6 @@ exports.getUsers = async () => {
 
     const result = await db.all("SELECT * FROM Users");
 
-    console.log(result);
     return result;
 }
 

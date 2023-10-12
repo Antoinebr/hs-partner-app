@@ -2,13 +2,6 @@
 <html lang="en">
 
 <head>
-
-    <!-- 
-      This is the main Handlebars template for the site 
-      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
-      - The server script passes data in here and the Handlebars code builds it into the HTML page
-    -->
-
     <meta charset="utf-8" />
     <link rel="icon" href="https://glitch.com/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -56,13 +49,18 @@
                         vide saltando vituperata, sonet quidam deterruisset te qui.Lorem ipsum dolor sit met.</p>
 
 
+                    <section class="flex">
+                        <a href="/addUser/" class="ml-auto text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add a user</a>
+                    </section>
+
+
                     <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-20 mt-10">
 
                         {{#if users}}
                             {{#each users}}
 
                                 <article class="h-100 filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
-                                    <div style="background-image:url( {{this.avatar}} );background-position: center center; background-repeat: no-repeat;background-size: cover;" class="h-48 mb-3"></div>
+                                    <div style="background-image:url( /{{this.avatar}} );background-position: center center; background-repeat: no-repeat;background-size: cover;" class="h-48 mb-3"></div>
                                     <div class="content px-4">
                                         <p class="text-l font-bold mt-3 mb-2">{{this.name}} {{this.lastname}}</p>
                                         <p class="text-xs mt-3 mb-2"> <span class="font-bold">Email : </span>{{this.email}} </p>
@@ -94,7 +92,8 @@
     </div>
 
 </body>
-  <!-- footer -->
-    {{> footer }}
-    <!-- footer -->
+<!-- footer -->
+{{> footer }}
+<!-- footer -->
+
 </html>

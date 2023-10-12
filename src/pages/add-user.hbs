@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <style>
+        pre code {
+            font-size: 0.9em !important;
+        }
+    </style>
+
+
+
+    <title>{{seo.title}}</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Import the webpage's stylesheet -->
+
+
+
+</head>
+
+<body>
+
+
+    <!-- Menu -->
+    {{> menu }}
+    <!-- Menu -->
+
+
+    <div class="container mx-auto">
+
+        <div class="bg-white h-5/5 px-2 lg:px-9 py-9">
+
+
+            <div class="grid grid-cols-1">
+
+                <div class="w-full  lg:px-40 mt-4 p-2">
+
+                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" value="{{user.email}}">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
+                                Lastname
+                            </label>
+                            <input class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                First name
+                            </label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" value="{{user.name}}">
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Model</label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmodel" type="text" placeholder="Car Model" value="{{user.carModel}}">
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="carmanufacturer">Car Manufacturer</label>
+                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmanufacturer" name="carmanufacturer">
+                                <option value="Alpine">Alpine</option>
+                                <option value="Alpha Romeo">Alpha Romeo</option>
+                                <option value="Aston Martin">Aston Martin</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Bmw">Bmw</option>
+                                <option value="Bugatti">Bugatti</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Citroen">Citroen</option>
+                                <option value="Datsun">Datsun</option>
+                                <option value="Dodge">Dodge</option>
+                                <option value="Ferrari">Ferrari</option>
+                                <option value="Fiat">Fiat</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Jaguar">Jaguar</option>
+                                <option value="Lamborghini">Lamborghini</option>
+                                <option value="Land Rover">Land Rover</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Maserati">Maserati</option>
+                                <option value="Mercedes">Mercedes</option>
+                                <option value="Mini">Mini</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Porsche">Porsche</option>
+                                <option value="Renault">Renault</option>
+                                <option value="Rolls Royce">Rolls Royce</option>
+                                <option value="Saab">Saab</option>
+                                <option value="Smart">Smart</option>
+                                <option value="Ssang Yong">Ssang Yong</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Tvr">Tvr</option>
+                                <option value="Volkswagen">Volkswagen</option>
+                                <option value="Volvo">Volvo</option>
+                                <option value="Wartburg">Wartburg</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
+                        </div>
+
+
+                        <div class="flex items-center justify-between">
+                            <button id="addBtn" class="bg-pink text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                Add a user
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div id="populateFormBtn" class=" py-2 px-4 rounded border focus:outline-none focus:shadow-outline">Populate Form</div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <script>
+                function generateRandomUserObject() {
+                    const firstNames = [
+                        "Mike",
+                        "John",
+                        "Franck",
+                        "David",
+                        "Luke",
+                        "Louis",
+                        "Matthew",
+                        "Daniel",
+                        "Christopher",
+                        "Joseph",
+                        "James",
+                        "William",
+                        "Benjamin",
+                        "Henry",
+                        "Robert",
+                        "Thomas",
+                        "Andrew",
+                        "Jacob",
+                        "Nicholas",
+                        "Samuel",
+                        "Nathan",
+                        "Zachary",
+                        "Tyler",
+                        "Alexander",
+                        "Dylan",
+                        "Landon",
+                        "Ryan",
+                        "Elijah",
+                        "Mason",
+                        "Caleb",
+                        "Samuel",
+                        "Jonathan",
+                        "Liam",
+                        "Oliver",
+                        "Ethan",
+                        "Aiden",
+                        "Lucas",
+                        "Eli",
+                        "Evelyn",
+                        "Nolan",
+                        "Dominic",
+                        "Cole",
+                        "Gavin",
+                        "Owen",
+                        "Max",
+                        "Theodore",
+                        "Hudson",
+                        "Sebastian",
+                        "Levi",
+                        "Wyatt",
+                        "Isaac",
+                        "Carter",
+                        "Jack",
+                        "Jordan",
+                        "Bryce",
+                        "Seth",
+                        "Hunter",
+                        "Oscar",
+                        "Evan",
+                        "Cooper",
+                        "Adam",
+                        "Brent",
+                        "Travis",
+                        "Lance",
+                        "Riley",
+                        "Spencer",
+                        "Shane",
+                        "Peter",
+                        "Dustin",
+                        "Wayne",
+                        "Trevor",
+                        "Kyle",
+                        "Garrett",
+                        "Justin",
+                        "Jared",
+                        "Keith",
+                        "Blake",
+                        "Allen",
+                        "Brian",
+                        "Paul",
+                        "Tyler",
+                        "Seth",
+                        "Kevin",
+                        "Eric",
+                        "Brett",
+                        "Chad",
+                        "Shawn",
+                        "Larry",
+                        "Brandon",
+                        "Scott",
+                        "Steven",
+                        "Kurt",
+                        "Derrick",
+                        "Marcus",
+                        "Patrick",
+                        "Nathaniel",
+                        "Victor",
+                        "Isaiah",
+                        "Malachi",
+                    ];
+
+                    const lastNames = [
+                        "Smith",
+                        "Johnson",
+                        "Davis",
+                        "Brown",
+                        "Taylor",
+                        "Anderson",
+                        "Wilson",
+                        "Miller",
+                        "Thomas",
+                        "Jones",
+                        "Clark",
+                        "Harris",
+                        "White",
+                        "Martin",
+                        "Lewis",
+                        "Walker",
+                        "Hall",
+                        "Young",
+                        "Moore",
+                        "Hill",
+                        "Allen",
+                        "King",
+                        "Wright",
+                        "Scott",
+                        "Parker",
+                        "Green",
+                        "Evans",
+                        "Morris",
+                        "Hughes",
+                        "Russell",
+                        "Carter",
+                        "Turner",
+                        "Phillips",
+                        "Edwards",
+                        "Reed",
+                        "Bennett",
+                        "Baker",
+                        "Roberts",
+                        "Morgan",
+                        "Bell",
+                        "Murphy",
+                        "Cooper",
+                        "Richardson",
+                        "Cox",
+                        "James",
+                        "Bailey",
+                        "Long",
+                        "Gonzalez",
+                        "Sanchez",
+                        "Mitchell",
+                        "Garcia",
+                        "Perez",
+                        "Torres",
+                        "Rivera",
+                        "Foster",
+                        "Cruz",
+                        "Rogers",
+                        "Stewart",
+                        "Reyes",
+                        "Simmons",
+                        "Foster",
+                        "Diaz",
+                        "Hayes",
+                        "Myers",
+                        "Rice",
+                        "Kim",
+                        "Gordon",
+                        "Lopez",
+                        "Wood",
+                        "Watson",
+                        "Brooks",
+                        "Gray",
+                        "Coleman",
+                        "Ward",
+                        "Harrison",
+                        "Ross",
+                        "Howard",
+                        "Gomez",
+                        "Henderson",
+                        "Cole",
+                        "Haynes",
+                        "Elliott",
+                        "Barnes",
+                        "Gardner",
+                        "Sullivan",
+                        "Murray",
+                        "Powell",
+                        "Riley",
+                        "Mills",
+                        "Palmer",
+                        "Stone",
+                        "Duncan",
+                        "Reid",
+                        "Gregory",
+                        "Larson",
+                        "Black",
+                        "Carroll",
+                        "Warren",
+                        "Wheeler",
+                        "Burton",
+                        "Banks",
+                        "Simon",
+                        "Matthews",
+                        "Woodard",
+                        "Stephens",
+                        "Williamson",
+                        "Dean",
+                        "Jenkins",
+                        "Hudson",
+                        "Mason",
+                        "Smith",
+                        "Thompson",
+                        "Gibson",
+                        "Mitchell",
+                        "Patterson",
+                        "Hunt",
+                        "Hayes",
+                        "Lambert",
+                        "Simpson",
+                        "Stevens",
+                        "Russell",
+                        "Jordan",
+                        "Bryant",
+                        "Greene",
+                        "Stone",
+                        "West",
+                        "Wells",
+                        "Cunningham",
+                        "Bates",
+                        "Woods",
+                        "Owens",
+                        "George",
+                        "Barker",
+                        "Porter",
+                        "Carr",
+                        "Hawkins",
+                        "Andrews",
+                        "Barrett",
+                        "Gomez",
+                        "Garrett",
+                        "Gardner",
+                        "Morrison",
+                        "Knight",
+                        "Stanley",
+                        "Miles",
+                        "Marshall",
+                        "Warren",
+                        "Brewer",
+                        "Franklin",
+                        "Simmons",
+                        "Carpenter",
+                        "Gonzalez",
+                        "Elliott",
+                        "West",
+                        "Murray",
+                        "Wagner",
+                    ];
+
+                    const domains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "aol.com"];
+
+                    const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+                    const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+                    const randomDomain = domains[Math.floor(Math.random() * domains.length)];
+                    const email = `${randomFirstName}${randomLastName}${Math.floor(Math.random() * 900)}@${randomDomain}`;
+
+                    return {
+                        firstname: randomFirstName,
+                        lastname: randomLastName,
+                        email: email,
+                    };
+                }
+
+
+                function generateDummyData() {
+                    const carData = {
+                        "Alpha Romeo": ["Model1", "Model2", "Model3"],
+                        "Citroen": ["ModelA", "ModelB", "ModelC"],
+                        "Lamborghini": ["Huracan", "Aventador", "Urus"],
+                        "Porsche": ["911", "Cayenne", "Panamera"],
+                        "Toyota": ["Camry", "Corolla", "Prius"],
+                        "Alpine": ["A110", "A310"],
+                        "Datsun": ["GO", "Redi-GO"],
+                        "Land Rover": ["Range Rover", "Discovery", "Defender"],
+                        "Renault": ["Clio", "Megane", "Duster"],
+                        "Tvr": ["Griffith", "Sagaris"],
+                        "Aston Martin": ["DB11", "Vantage", "DBS Superleggera"],
+                        "Dodge": ["Charger", "Challenger", "Durango"],
+                        "Lexus": ["ES", "RX", "LS"],
+                        "Rolls Royce": ["Phantom", "Cullinan", "Wraith"],
+                        "Volkswagen": ["Golf", "Passat", "Tiguan"],
+                        "Audi": ["A3", "A4", "Q5","RS6"],
+                        "Ferrari": ["488 GTB", "F8 Tributo", "Portofino"],
+                        "Maserati": ["Ghibli", "Levante", "Quattroporte"],
+                        "Saab": ["9-3", "9-5"],
+                        "Volvo": ["S60", "XC60", "XC90"],
+                        "Bmw": ["X1","3 Series", "5 Series", "X5"],
+                        "Fiat": ["500", "Panda", "Tipo"],
+                        "Mercedes": ["C-Class", "E-Class", "S-Class"],
+                        "Smart": ["ForTwo", "ForFour"],
+                        "Wartburg": ["353", "311"],
+                        "Bugatti": ["Chiron", "Veyron", "Divo"],
+                        "Ford": ["F-150", "Mustang", "Focus"],
+                        "Mini": ["Cooper", "Countryman", "Clubman"],
+                        "Ssang Yong": ["Tivoli", "Korando", "Rexton"],
+                        "Chevrolet": ["Camaro", "Silverado", "Malibu"],
+                        "Jaguar": ["F-PACE", "XJ", "I-PACE"],
+                        "Nissan": ["Altima", "Rogue", "Maxima"],
+                        "Tesla": ["Model 3", "Model S", "Model X"],
+                    };
+
+
+                    const carManufacturers = Object.keys(carData);
+
+                    const selectedManufacturer = carManufacturers[Math.floor(Math.random() * carManufacturers.length)];
+                    const availableModels = carData[selectedManufacturer];
+                    const selectedModel = availableModels[Math.floor(Math.random() * availableModels.length)];
+
+                    // Generate random data
+
+
+                    const { email, lastname, firstname } = generateRandomUserObject();
+
+
+                    const dummyData = {
+                        email,
+                        lastname,
+                        name: firstname,
+                        carmodel: selectedModel,
+                        carmanufacturer: selectedManufacturer,
+                        tokensavailable: Math.floor(Math.random() * 1000)
+                    };
+
+                    return dummyData;
+                }
+
+
+
+
+                // Get a reference to the button element
+                const populateFormButton = document.getElementById("populateFormBtn");
+
+                // Add a click event listener to the button
+                populateFormButton.addEventListener("click", function() {
+                    // Dummy data (you can replace this with your actual data source)
+                    const dummyData = generateDummyData();
+
+                    // Populate the form fields with the dummy data
+                    document.getElementById("email").value = dummyData.email;
+                    document.getElementById("lastname").value = dummyData.lastname;
+                    document.getElementById("name").value = dummyData.name;
+                    document.getElementById("carmodel").value = dummyData.carmodel;
+                    document.getElementById("carmanufacturer").value = dummyData.carmanufacturer;
+                    document.getElementById("tokensavailable").value = dummyData.tokensavailable;
+                });
+            </script>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+</body>
+<!-- footer -->
+{{> footer }}
+<!-- footer -->
+
+
+
+
+</html>

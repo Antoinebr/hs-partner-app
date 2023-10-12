@@ -17,6 +17,37 @@ const axiosConfig = {
 
 
 /**
+ * Handles errors thrown by axios requests and logs relevant information.
+ *
+ * @param {Error} error - The error object thrown by axios.
+ */
+/**
+ * Handles errors thrown by axios requests and logs relevant information.
+ *
+ * @param {Error} error - The error object thrown by axios.
+ */
+const axiosErrorHandler = error => {
+    if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+    } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser 
+        // and an instance of http.ClientRequest in node.js
+        console.log(error.request);
+    } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+    }
+}
+
+
+
+
+/**
  * 
  * @param {string} email 
  * @returns {Promise}
@@ -54,22 +85,6 @@ exports.getContactIdFromEmail = async (email) => {
 
 
 
-
-/*
-curl --request PATCH \
-  --url 'https://api.hubapi.com/crm/v3/objects/contacts/?hapikey=YOUR_HUBSPOT_API_KEY' \
-  --header 'content-type: application/json' \
-  --data '{
-  "properties": {
-    "company": "Biglytics",
-    "email": "bcooper@biglytics.net",
-    "firstname": "Bryan",
-    "lastname": "Cooper",
-    "phone": "(877) 929-0687",
-    "website": "biglytics.net"
-  }
-}'
-*/
 exports.updateContactByContactId = async (contactId, properties) => {
 
     if (!privateAppToken) throw new Error(`There's not privateAppToken setup`);
@@ -78,6 +93,8 @@ exports.updateContactByContactId = async (contactId, properties) => {
 
     return await axios.patch(endpoint, properties, axiosConfig);
 }
+
+
 
 
 
@@ -116,7 +133,7 @@ exports.syncTheDBwithHubspot = async () => {
             }).catch(error => console.error(error));
 
             contactUpdated.push(res.data);
-        
+
         }
 
 
@@ -130,67 +147,121 @@ exports.syncTheDBwithHubspot = async () => {
 exports.syncTestWithHubSpot = async () => {
 
     // carey85@gmail.com
-
-
 }
-
 
 exports.getAllTickets = async () => {
 
-    
+
     const response = await axios.post('https://api.hubspot.com/crm/v3/objects/tickets/search', {
-      filterGroups: [
-        {
-          filters: [
-            {
+        filterGroups: [{
+            filters: [{
                 propertyName: 'hs_ticket_requester_email',
                 operator: 'EQ',
                 value: 'abrossault@hubspot.com'
-            }
-          ]
-        }
-      ],
-      "properties": [
-        "name"
-    ],
+            }]
+        }],
+        "properties": [
+            "name"
+        ],
     }, axiosConfig).catch(console.log)
 
     // Le tableau de tickets en statut "open" pour le contact spécifié se trouve dans response.data.results
     const openTickets = response.data.results;
-    console.log(openTickets);
 
     return openTickets;
 
 }
 
 
+
+exports.addContact = async (properties) => {
+
+    if (!privateAppToken) throw new Error(`There's not privateAppToken setup`);
+
+    const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts`;
+
+    console.log("🔥 addContact")
+
+    return await axios.post(endpoint, properties, axiosConfig);
+};
+
+
+exports.getAllConversations = async () => {
+
+    const apiUrl = `https://api.hubapi.com/conversations/v3/conversations/threads`;
+
+    const response = await axios.get(apiUrl, {
+        headers: {
+            authorization: `Bearer ${process.env.privateAppTokenPartner}`
+        }
+    }).catch(console.log);
+
+    return response.data;
+
+}
+
 exports.displayAllTickets = async () => {
 
+    const apiUrl = `https://api.hubapi.com/crm/v3/objects/tickets?limit=100&archived=false`;
 
-   console.log('llll'); 
+    const response = await axios.get(apiUrl, {
+        headers: {
+            authorization: `Bearer ${process.env.privateAppTokenPartner}`
+        }
+    }).catch(console.log);
 
-        const apiUrl = `https://api.hubapi.com/crm/v3/objects/tickets?limit=100&archived=false`;
+    const { results, paging } = response.data;
+
+
+    const ticketContent = [];
+
+    for (const result of results) {
+        ticketContent.push(result.properties)
+    }
+
+    return ticketContent.reverse();
+
+}
+
+
+exports.getTicket = async (id = null) => {
+
+    if (!id) throw new Error('you need to set an id for the ticket ');
+
+    const apiUrl = `https://api.hubapi.com/crm/v3/objects/tickets/${id}?properties=subject,content,hs_ticket_category`;
+
+    const response = await axios.get(apiUrl, {
+        headers: {
+            authorization: `Bearer ${process.env.privateAppTokenPartner}`
+        }
+    }).catch(console.log);
+
+
+    return response.data;
+
+}
+
+
+
+
+exports.authVisitor = async (email) => {
+
+    if (!email) throw new Error('you need to set an email ');
+
+    const url = 'https://api.hubspot.com/conversations/v3/visitor-identification/tokens/create';
+
+    const postData = {
+        email
+    };
     
-   
-          const response = await axios.get(apiUrl,
-            {
-                headers: {
-                    authorization: `Bearer ${process.env.privateAppTokenPartner}`
-                }
-            }
-          ).catch(console.log);
-    
-          const { results, paging } = response.data;
+    const response = await axios.post(url, postData, axiosConfig).catch(axiosErrorHandler)
 
+    if(!response) throw new Error(`API didn't respond...`)
 
-          const ticketContent = [];
+    if(!response.data) throw new Error(`API didn't respond with data ...`)
 
-          for( const result of results){
-            ticketContent.push(result.properties) 
-          }
+    if(!response.data.token) throw new Error(`API didn't respond with a token ...`)
 
+    return response.data.token;
 
-        return ticketContent;
-    
- 
 }

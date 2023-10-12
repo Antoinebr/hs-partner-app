@@ -9,13 +9,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
     <style>
         pre code {
             font-size: 0.9em !important;
         }
     </style>
-    
+
 
 
     <title>{{seo.title}}</title>
@@ -48,74 +51,122 @@
 
         <div class="bg-white h-5/5 px-2 lg:px-9 py-9">
 
-
-
-            <p class="text-4xl font-light ">Edit {{user.name}} 's account </p>
-
-            <p class="text-4xl font-bold pb-4">And sync the changes to HubSpot</p>
+            <section class="flex">
+                <button id="removeUser" email="{{user.email}}" class="ml-auto text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Remove user</a>
+            </section>
 
 
 
-            <p class="text-gray-500"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Te cum vivendum explicate abhorrent. Id venom argumentum vel. Ut lorem bocent hendrerit eam. </p>
-            
+            <div class="grid grid-cols-2">
+
+                <div class="w-full mt-4 p-2">
+
+                    <form class="bg-white shadow-md rounded px-8 pb-8 mb-4">
+
+                        <div class="flex items-center justify-center w-32 h-32 rounded-full m-auto">
+                            <img src="/{{user.avatar}}" alt="" class="rounded-full">
+                        </div>
+
+                        <p class="text-4xl font-light p-3 text-center">{{user.name}} / <span class="font-bold">{{user.lastname}}</span> </p>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
+                                Lastname
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}" disabled>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                First name
+                            </label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" value="{{user.name}}" disabled>
+                        </div>
 
 
-            <div class="w-full max-w-xs mt-6">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Model</label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmodel" type="text" placeholder="Car Model" value="{{user.carModel}}">
+                        </div>
 
 
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="carmanufacturer">Car Manufacturer</label>
+                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmanufacturer" name="carmanufacturer" preselectedvalue="{{user.carManufacturer}}">
+                                <option value="Alpine">Alpine</option>
+                                <option value="Alpha Romeo">Alpha Romeo</option>
+                                <option value="Aston Martin">Aston Martin</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Bmw">Bmw</option>
+                                <option value="Bugatti">Bugatti</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Citroen">Citroen</option>
+                                <option value="Datsun">Datsun</option>
+                                <option value="Dodge">Dodge</option>
+                                <option value="Ferrari">Ferrari</option>
+                                <option value="Fiat">Fiat</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Jaguar">Jaguar</option>
+                                <option value="Lamborghini">Lamborghini</option>
+                                <option value="Land Rover">Land Rover</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Maserati">Maserati</option>
+                                <option value="Mercedes">Mercedes</option>
+                                <option value="Mini">Mini</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Porsche">Porsche</option>
+                                <option value="Renault">Renault</option>
+                                <option value="Rolls Royce">Rolls Royce</option>
+                                <option value="Saab">Saab</option>
+                                <option value="Smart">Smart</option>
+                                <option value="Ssang Yong">Ssang Yong</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Tvr">Tvr</option>
+                                <option value="Volkswagen">Volkswagen</option>
+                                <option value="Volvo">Volvo</option>
+                                <option value="Wartburg">Wartburg</option>
+                            </select>
+                        </div>
 
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                            Email
-                        </label>
-                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
+                        </div>
+
+
+                        <div class="flex items-center justify-between">
+                            <button id="editBtn" class="m-auto text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                                Update
+                            </button>
+                        </div>
+                        
+                        <a href="https://app.hubspot.com/contacts/21169044/objects/0-1/views/all/list?globalSearchQuery={{user.email}}&searchFilters=CONTACT" target="_blank" class="text-xs" >See contact in HubSpot</a>
+                    </form>
+
+                </div>
+
+
+                <div class="w-full mt-4 p-2">
+                    <img src="/img/cars/{{user.carManufacturer}}.webp" alt="">
+
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-5xl font-extrabold leading-tight text-center text-dark-grey-900"><span id="countto1" countTo="{{user.tokensAvailable}}"></span></h3>
+                        <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Tokens availables</p>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
-                            Lastname
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}" disabled>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                            First name
-                        </label>
-                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" value="{{user.name}}" disabled>
-                    </div>
-
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Model</label>
-                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmodel" type="text" placeholder="Car Model" value="{{user.carModel}}" disabled>
-                    </div>
-
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Manufacturer</label>
-                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmanufacturer" type="text" placeholder="Car Manufacturer" value="{{user.carManufacturer}}" disabled>
-                    </div>
-
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
-                        <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
-                    </div>
-
-
-                    <div class="flex items-center justify-between">
-                        <button id="editBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                            Update
-                        </button>
-                    </div>
-
-                </form>
+                </div>
 
             </div>
-
 
 
 
@@ -195,31 +246,52 @@ exports.updateContactByContactId = async (contactId, properties) => {
 
 
 
-
-
-
-
-
-    <div class="wrapper">
-        <div class="content" role="main">
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-
-    </div>
-    </div>
-
 </body>
-  <!-- footer -->
-    {{> footer }}
-    <!-- footer -->
+<!-- footer -->
+{{> footer }}
+<!-- footer -->
+
+
+<script src="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/scripts/plugins/countup.min.js"></script>
+<script>
+    let numbers = document.querySelectorAll("[countTo]");
+
+    numbers.forEach((number) => {
+        let ID = number.getAttribute("id");
+        let value = number.getAttribute("countTo");
+        let countUp = new CountUp(ID, value);
+
+        if (number.hasAttribute("data-decimal")) {
+            const options = {
+                decimalPlaces: 1,
+            };
+            countUp = new CountUp(ID, 2.8, options);
+        } else {
+            countUp = new CountUp(ID, value);
+        }
+
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+            number.innerHTML = value;
+        }
+    });
+
+
+    var userTokensAvailable = document.querySelector('#carmanufacturer').getAttribute('preselectedvalue');
+
+    // Get a reference to the select element
+    var selectElement = document.getElementById("carmanufacturer");
+
+    // Loop through the options and set the selected attribute on the matching one
+    for (var i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === userTokensAvailable) {
+            selectElement.options[i].selected = true;
+            break; // Exit the loop once a match is found
+        }
+    }
+</script>
+
+
 </html>

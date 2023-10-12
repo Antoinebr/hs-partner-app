@@ -41,7 +41,7 @@
 
             <!-- This is the start of content for our page -->
 
-            <div class="container mx-auto">
+            <div class="container mx-auto w-10/12">
 
                 <div class="bg-white h-5/5 px-9 py-9">
 
@@ -62,14 +62,16 @@
                             {{#each tickets}}
 
                     
-                                <article class="filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
-                                    
-                                    <div class="content px-4">
-                                        <p class="text-l font-bold mt-3 mb-2">{{this.subject}}</p>
-                                        <p class="text-xs mt-3 mb-2"> {{{this.content}}}</p>
-                                        <p class="text-xs mt-3 mb-2">{{this.hs_ticket_category}}</p>
-                                    </div>
-                                </article>
+                                <a href="/mytickets/{{this.hs_object_id}}">
+                                    <article class="filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
+                                        
+                                        <div class="content px-4">
+                                            <p class="text-l font-bold mt-3 mb-2">{{this.subject}}</p>
+                                            <p class="text-xs mt-3 mb-2"> {{{this.content}}}</p>
+                                            <p class="text-xs mt-3 mb-2">{{this.hs_ticket_category}}</p>
+                                        </div>
+                                    </article>
+                                </a>
 
                             {{/each}}
                         {{/if}}

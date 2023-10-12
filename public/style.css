@@ -16,9 +16,6 @@ body {
   justify-content: left;
 }
 
-p {
-  font-size: 1.25rem;
-}
 
 /* Title h1 style */
 .title {
@@ -74,7 +71,7 @@ input {
   font-family: inherit;
   font-size: 100%;
   background: #FFFFFF;
-  border: 1px solid #000000;
+  border: 1px solid #00000020;
   box-sizing: border-box;
   border-radius: 4px;
   padding: 0.5rem 1rem;
@@ -118,9 +115,12 @@ h2 {
 }
 
 .bg-pink {
-  background-color: #ff78b3;
+  background-color: #ff78b3!important;
 }
 
+[type=button], [type=reset], [type=submit], button {
+  background-color: #ff78b3!important;
+}
 
 .text-blue{
   color:#354F91;
@@ -136,6 +136,17 @@ h2 {
 
 .z--1{
   z-index: -1;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 
 
