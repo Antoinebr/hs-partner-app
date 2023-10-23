@@ -63,11 +63,9 @@ body {
   cursor: pointer;
   box-shadow: -8px 4px 20px #9BE7D8;
 }
-form {
-  margin: 0.75rem 0;
-}
-button,
-input {
+
+
+/* input {
   font-family: inherit;
   font-size: 100%;
   background: #FFFFFF;
@@ -75,11 +73,11 @@ input {
   box-sizing: border-box;
   border-radius: 4px;
   padding: 0.5rem 1rem;
-}
-label {
+} */
+/* label {
   color: #000000;
   font-weight: bold;
-}
+} */
 
 /* Instructions */
 .instructions {
@@ -88,9 +86,9 @@ label {
 .instructions p {
   font-size: 1rem;
 }
-h2 {
+/* h2 {
   color: #2800FF;
-}
+} */
 
 
 .deal{
@@ -118,9 +116,9 @@ h2 {
   background-color: #ff78b3!important;
 }
 
-[type=button], [type=reset], [type=submit], button {
+/* [type=button], [type=reset], [type=submit], button {
   background-color: #ff78b3!important;
-}
+} */
 
 .text-blue{
   color:#354F91;
@@ -156,7 +154,6 @@ h2 {
 
 }
 
-
-button{
-  border: none;
+pre code {
+  font-size: 0.9em !important;
 }

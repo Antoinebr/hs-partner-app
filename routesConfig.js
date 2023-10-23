@@ -1,6 +1,7 @@
 exports.checkIfAuthenticated = (req, reply, done) => {
     
-    //console.log(req.method, req.url);
+    
+    console.log( req.headers['user-agent'],'  ',req.method, req.url);
     
     const protectedRoutes = ['/api/user'];
 

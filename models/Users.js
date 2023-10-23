@@ -4,6 +4,13 @@ db.open("./db/db.sqlite");
 
 
 
+/**
+ * Insert a user into the Users table.
+ *
+ * @param {Object} user - The user object to be inserted into the database.
+ * @returns {Promise} - A promise that resolves with the result of the insertion.
+ * @throws {Error} - Throws an error if the user is not an object.
+ */
 exports.insertUser = async (user) => {
 
     if (typeof user !== "object") throw new console.error(`user has to be an object`);
@@ -24,6 +31,11 @@ exports.insertUser = async (user) => {
 }
 
 
+/**
+ * Create the Users table in the database.
+ *
+ * @returns {Promise} - A promise that resolves when the table is created.
+ */
 exports.createUserTable = async () => {
 
     const query = `
@@ -45,6 +57,11 @@ exports.createUserTable = async () => {
 }
 
 
+/**
+ * Get a list of all users from the Users table.
+ *
+ * @returns {Promise} - A promise that resolves with an array of user objects.
+ */
 exports.getUsers = async () => {
 
     const result = await db.all("SELECT * FROM Users");
@@ -53,6 +70,12 @@ exports.getUsers = async () => {
 }
 
 
+/**
+ * Get a user from the Users table by their email.
+ *
+ * @param {string} email - The email of the user to retrieve.
+ * @returns {Promise} - A promise that resolves with the user object.
+ */
 exports.getUser = async (email) => {
 
     const result = await db.get("SELECT * FROM Users WHERE email = $email", {
@@ -62,6 +85,13 @@ exports.getUser = async (email) => {
     return result;
 }
 
+
+/**
+ * Delete a user from the Users table by their email.
+ *
+ * @param {string} email - The email of the user to delete.
+ * @returns {Promise} - A promise that resolves with the result of the deletion.
+ */
 exports.destroyUser = async (email) => {
 
     const result = await db.get("DELETE FROM Users WHERE email = $email", {
@@ -72,6 +102,13 @@ exports.destroyUser = async (email) => {
 }
 
 
+
+/**
+ * Update a user's information in the Users table.
+ *
+ * @param {Object} user - The user object with updated information.
+ * @returns {Promise} - A promise that resolves with the result of the update operation.
+ */
 exports.updateUser = async (user) => {
 
     const update = await db.run(`

@@ -7,7 +7,8 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "prod:restart": "forever restart server.js",
-    "prod:start": "forever start server.js"
+    "prod:start": "forever start server.js",
+    "prod:logs" : "forever logs server.js -f"
   },
   "dependencies": {
     "axios": "^0.27.2",

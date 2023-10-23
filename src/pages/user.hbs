@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <title>{{seo.title}}</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Import the webpage's stylesheet -->
+
+
+
+</head>
+
+<body>
+
+
+    <!-- Menu -->
+    {{> menu }}
+    <!-- Menu -->
+
+
+    <div class="main">
+
+        <div class="bg-white h-5/5">
+
+            <div class="grid grid-cols-6 gap-4">
+
+                <div class="col-span-2  mt-4 ">
+
+                    <form class="bg-white shadow-md rounded px-8 pb-8 mb-4">
+
+                        <div class="flex items-center justify-center w-32 h-32 rounded-full m-auto">
+                            <img src="/{{user.avatar}}" alt="" class="rounded-full">
+                        </div>
+
+                        <p class="text-4xl font-light p-3 text-center">{{user.name}} / <span class="font-bold">{{user.lastname}}</span> </p>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" value="{{user.email}}" disabled>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
+                                Lastname
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Lastname" value="{{user.lastname}}" disabled>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                First name
+                            </label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" value="{{user.name}}" disabled>
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Car Model</label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmodel" type="text" placeholder="Car Model" value="{{user.carModel}}">
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="carmanufacturer">Car Manufacturer</label>
+                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="carmanufacturer" name="carmanufacturer" preselectedvalue="{{user.carManufacturer}}">
+                                <option value="Alpine">Alpine</option>
+                                <option value="Alpha Romeo">Alpha Romeo</option>
+                                <option value="Aston Martin">Aston Martin</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Bmw">Bmw</option>
+                                <option value="Bugatti">Bugatti</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Citroen">Citroen</option>
+                                <option value="Datsun">Datsun</option>
+                                <option value="Dodge">Dodge</option>
+                                <option value="Ferrari">Ferrari</option>
+                                <option value="Fiat">Fiat</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Jaguar">Jaguar</option>
+                                <option value="Lamborghini">Lamborghini</option>
+                                <option value="Land Rover">Land Rover</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Maserati">Maserati</option>
+                                <option value="Mercedes">Mercedes</option>
+                                <option value="Mini">Mini</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Porsche">Porsche</option>
+                                <option value="Renault">Renault</option>
+                                <option value="Rolls Royce">Rolls Royce</option>
+                                <option value="Saab">Saab</option>
+                                <option value="Smart">Smart</option>
+                                <option value="Ssang Yong">Ssang Yong</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Tvr">Tvr</option>
+                                <option value="Volkswagen">Volkswagen</option>
+                                <option value="Volvo">Volvo</option>
+                                <option value="Wartburg">Wartburg</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="tokens">Tokens Availables</label>
+                            <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="tokensavailable" type="number" placeholder="Tokens" value="{{user.tokensAvailable}}">
+                        </div>
+
+
+                        <div class="flex items-center justify-between">
+                            <button id="editBtn" class="ml-auto text-white bg-pink focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                                Update
+                            </button>
+                        </div>
+
+                        <a href="https://app.hubspot.com/contacts/21169044/objects/0-1/views/all/list?globalSearchQuery={{user.email}}&searchFilters=CONTACT" target="_blank" class="text-xs">See contact in HubSpot</a>
+
+                        <section class="flex">
+                            <button id="removeUser" email="{{user.email}}" class="border focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Remove user</a>
+                        </section>
+
+                    </form>
+
+                </div>
+
+
+                <div class="col-span-4 mt-4 p-2">
+
+                    <article class="car shadow-md p-2 rounded ">
+                        <img src="/img/cars/{{user.carManufacturer}}.webp" class="max-w-2xl m-auto" alt="">
+                        <div class="flex flex-col items-center">
+                            <h3 class="text-5xl font-extrabold leading-tight text-center text-dark-grey-900"><span id="countto1" countTo="{{user.tokensAvailable}}"></span></h3>
+                            <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Tokens availables</p>
+                        </div>
+                    </article>
+
+                    <article class="orders shadow-md p-4 mt-4 rounded ">
+                        <p class="mb-2"> {{user.name}}'s <span class="font-bold">/ Orders</span> : </p>
+
+                        <table class="table-auto w-full border">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 text-left border">id</th>
+                                    <th class="px-4 py-2 text-left border">name</th>
+                                    <th class="px-4 py-2 text-left border">status</th>
+                                    <th class="px-4 py-2 text-left border">amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#if orders}}
+                                    {{#each orders}}
+                                        <tr>
+                                            <td class="px-4 py-2 border">{{this.id}} </td>
+                                            <td class="px-4 py-2 border">{{this.orderName}}</td>
+                                            <td class="px-4 py-2 border">{{this.status}}</td>
+                                            <td class="px-4 py-2 border">{{this.amount}}€</td>
+                                        </tr>
+                                    {{/each}}
+                                {{/if}}
+                            </tbody>
+                        </table>
+
+                        <!-- Button to trigger the pop-up -->
+                        <button id="openPopup" class="mt-1 text-grey border py-2 px-4 rounded focus:outline-none focus:shadow-outline"> <span class="font-bold text-xl">+</span> add order</button>
+
+                        <!-- Pop-up -->
+                        <div id="popup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
+                            <div class="bg-white p-4 rounded-lg w-1/3">
+
+                                <p class="text-xl font-bold mb-2">Add an order</p>
+                                <p>Place an order for this user</p>
+
+
+                                <form id="placeOrder" class="px-8 pt-6 pb-8 mb-4">
+
+                                    <div class="mb-4 hidden">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="userId">
+                                            userId
+                                        </label>
+                                        <input class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="userId" type="number" placeholder="userId" value="{{user.ID}}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="orderName">
+                                            Order Name
+                                        </label>
+                                        <input class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="orderName" type="text" placeholder="Order name">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
+                                            Order Status
+                                        </label>
+                                        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="status">
+                                            <option value="paid">Paid</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="shipped">Shipped</option>
+                                            <option value="delivered">Delivered</option>
+                                            <option value="refunded">Refunded</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+                                            Amount
+                                        </label>
+                                        <input class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" type="text" placeholder="Order amount">
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <button class="bg-pink text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                            Place order
+                                        </button>
+                                    </div>
+
+                                </form>
+
+
+                               
+                                <button id="closePopup" class="mt-1 ml-auto text-grey border py-2 px-4 rounded focus:outline-none focus:shadow-outline"> <span class="font-bold">X</span> close</button>
+                            </div>
+                        </div>
+                        <!-- Pop-up end -->
+
+
+                    </article>
+
+
+
+                    <article class="shadow-md p-4 mt-4 rounded h-96">
+                        <canvas id="mileageChart"></canvas>
+                    </article>
+
+         
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div> <!-- main -->
+
+
+
+
+</body>
+<!-- footer -->
+{{> footer }}
+<!-- footer -->
+
+
+<script src="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/scripts/plugins/countup.min.js"></script>
+
+
+<script>
+    // Get elements
+    const openButton = document.getElementById("openPopup");
+    const closeButton = document.getElementById("closePopup");
+    const popup = document.getElementById("popup");
+
+    // Function to open the pop-up
+    function openPopup() {
+        popup.classList.remove("hidden");
+        popup.classList.add("flex");
+        document.body.style.overflow = "hidden"; // Prevent scrolling when the pop-up is open
+    }
+
+    // Function to close the pop-up
+    function closePopup() {
+        popup.classList.remove("flex");
+        popup.classList.add("hidden");
+        document.body.style.overflow = "auto"; // Allow scrolling when the pop-up is closed
+    }
+
+    // Event listeners
+    openButton.addEventListener("click", openPopup);
+    closeButton.addEventListener("click", closePopup);
+
+    // Close the pop-up if the user clicks outside the pop-up content
+    popup.addEventListener("click", (e) => {
+        if (e.target === popup) {
+            closePopup();
+        }
+    });
+</script>
+
+<script src="/charts.js"></script>
+<script src="/countTo.js"></script>
+
+
+</html>

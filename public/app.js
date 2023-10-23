@@ -103,8 +103,11 @@ document.querySelector('#removeUser')?.addEventListener('click', async e => {
 
     e.preventDefault();
 
-
     const email = document.querySelector('#removeUser').getAttribute('email');
+
+    const confirmation  = confirm('Are you sure to remove '+ email+ '?');
+
+    if(!confirmation) return; 
 
     if(!email) alert('No email set in the email attribute');
     
@@ -237,6 +240,9 @@ document.querySelector('#login')?.addEventListener("submit", async (event) => {
             const data = await response.json();
             
             if(!data.token) throw new Error(`No token received by the backend`);
+            
+            localStorage.setItem('identificationEmail',emailInput.value);
+            localStorage.setItem('identificationToken',data.token);
 
             window.hsConversationsSettings = {
                 identificationEmail: emailInput.value,
@@ -247,7 +253,10 @@ document.querySelector('#login')?.addEventListener("submit", async (event) => {
                 
             const {JWT} = data;
 
-            if(!JWT) alert('Wrong password')
+            if(!JWT){
+                alert('Wrong password');
+                return;
+            } 
 
             if(JWT){
                 console.log("Password is correct ! JWT set in localstorage !")
@@ -264,3 +273,69 @@ document.querySelector('#login')?.addEventListener("submit", async (event) => {
         
     
   });
+
+
+  
+document.querySelector('#placeOrder')?.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const userId = document.querySelector('#userId').value;
+    const orderName = document.querySelector('#orderName').value;
+    const status = document.querySelector('#status').value;
+    const amount = document.querySelector('#amount').value;
+
+
+      try {
+
+            const response = await fetch("/api/order",  {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId,
+                    orderName,
+                    status,
+                    amount
+                })
+            });
+
+        
+            if (!response.ok) throw new Error(`Request failed with status: ${response.status}`);
+
+            const data = await response.json();
+
+            if(!data) throw new Error(`Request failed with status: ${response.status}`);
+            const {changes} = data;
+
+            if(!changes) throw new Error(`API responded but no changes in the database`);
+
+            location.reload();
+            
+    
+    } catch (error) {
+            alert(`'An error occurred:', ${error}`)
+            console.error('An error occurred:', error);
+    
+    }
+        
+    
+  });
+
+
+
+//   window.addEventListener('load', () => {
+
+//     window.hsConversationsSettings = {
+//         identificationEmail: localStorage.get('identificationEmail'),
+//         identificationToken: localStorage.get('identificationToken')
+//     };
+
+//     window.HubSpotConversations.widget.load();
+
+//   });
+
+// localStorage.setItem('identificationEmail',emailInput.value);
+// localStorage.setItem('identificationToken',data.token);
+            

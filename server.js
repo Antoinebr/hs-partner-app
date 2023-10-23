@@ -5,6 +5,7 @@ require('dotenv').config({
 const path = require("path");
 const siretCtrl = require('./controllers/siretCtrl');
 const usersCtrl = require('./controllers/usersCtrl.js');
+const ordersCtrl = require('./controllers/ordersCtrl.js');
 const routesConfig = require('./routesConfig.js');
 const hubSpotAPI = require('./apis/hubSpot')
 const fs = require('fs');
@@ -55,7 +56,6 @@ fastify.register(require("point-of-view"), {
 
 // Load and parse SEO data
 const seo = require("./src/seo.json");
-
 
 
 fastify.get("/", function(request, reply) {
@@ -114,7 +114,7 @@ fastify.post("/login", async function(request, reply) {
     let JWT = null
 
     if (request.body.password && request.body.password !== "") {
-        JWT = (request.body.password === process.env.adminPassword) ? process.env.JWT : false;
+        JWT = (request.body.password === process.env.adminPassword || request.body.password === process.env.teamPassword) ? process.env.JWT : false;
     }
     const authResult = await hubSpotAPI.authVisitor(user.email);
 
@@ -135,13 +135,34 @@ fastify.get("/editUser/:email", async (request, reply) => {
 
     const user = await usersCtrl.getUser(email);
 
-    reply.view("/src/pages/form.hbs", {
+    const {ID} = user;
+
+    const orders = await ordersCtrl.getOrdersByUserId(ID);
+
+    orders.stringify = JSON.stringify(orders);
+
+    
+    reply.view("/src/pages/user.hbs", {
         user,
+        orders,
         seo
     });
 
 });
 
+
+/**
+ * API USERS
+ */
+fastify.post("/api/user", async (request, reply) => {
+
+    if (request.body === undefined) throw new Error(`a body needs to be set, we recieved  ${typeof request.body}`)
+
+    const user = await usersCtrl.addUser(request.body);
+
+    reply.send(user);
+
+});
 
 
 fastify.get("/api/users", async (request, reply) => {
@@ -158,77 +179,6 @@ fastify.get("/api/user/:email", async (request, reply) => {
 
     reply.send(user);
 });
-
-
-fastify.delete("/api/user/:email", async (request, reply) => {
-
-    const { email } = request.params;
-
-    const user = await usersCtrl.removeUser(email);
-
-    reply.send(user);
-});
-
-
-
-
-
-fastify.get("/api/user/", async (request, reply) => {
-
-    if (request.query.email === undefined) throw new Error(`Email needs to be set, we recieved  ${typeof request.query.email}`)
-
-    try {
-        const user = await usersCtrl.getUser(request.query.email);
-
-        reply.send(user);
-
-    } catch (error) {
-
-        reply.status(404).send({ error: true, errorMessage : error.toString() });
-    }
-
-});
-
-
-
-fastify.post("/api/user", async (request, reply) => {
-
-    if (request.body === undefined) throw new Error(`a body needs to be set, we recieved  ${typeof request.body}`)
-
-    const user = await usersCtrl.addUser(request.body);
-
-    reply.send(user);
-
-});
-
-
-
-fastify.get("/addUser/", async (request, reply) => {
-
-    // params is an object we'll pass to our handlebars template
-    let params = {
-        seo: seo
-    };
-
-    reply.view("/src/pages/add-user.hbs", {
-        seo
-    });
-
-});
-
-
-
-fastify.get("/users", async (request, reply) => {
-
-    const users = await usersCtrl.getAllusers();
-
-    reply.view("/src/pages/users.hbs", {
-        users
-    });
-
-});
-
-
 
 fastify.patch("/api/user", async function(request, reply) {
 
@@ -267,7 +217,142 @@ fastify.patch("/api/user", async function(request, reply) {
 
 });
 
+fastify.delete("/api/user/:email", async (request, reply) => {
 
+    const { email } = request.params;
+
+    const user = await usersCtrl.removeUser(email);
+
+    reply.send(user);
+});
+
+fastify.get("/api/user/", async (request, reply) => {
+
+    if (request.query.email === undefined) throw new Error(`Email needs to be set, we recieved  ${typeof request.query.email}`)
+
+    try {
+        const user = await usersCtrl.getUser(request.query.email);
+
+        reply.send(user);
+
+    } catch (error) {
+
+        reply.status(404).send({ error: true, errorMessage : error.toString() });
+    }
+
+});
+
+fastify.get("/addUser/", async (request, reply) => {
+
+    // params is an object we'll pass to our handlebars template
+    let params = {
+        seo: seo
+    };
+
+    reply.view("/src/pages/add-user.hbs", {
+        seo
+    });
+
+});
+
+
+fastify.get("/users", async (request, reply) => {
+
+    const users = await usersCtrl.getAllusers();
+
+    reply.view("/src/pages/users.hbs", {
+        users
+    });
+
+});
+
+
+
+
+
+/**
+ * 
+ * API Orders
+ * 
+ */
+fastify.post("/api/order", async (request, reply) => {
+
+    if (request.body === undefined) throw new Error(`a body needs to be set, we recieved  ${typeof request.body}`)
+
+    const order = await ordersCtrl.addOrder(request.body);
+
+    reply.send(order);
+
+});
+
+
+fastify.get("/api/orders", async (request, reply) => {
+    const orders = await ordersCtrl.getAllOrders();
+    reply.send(orders);
+});
+
+
+fastify.get("/api/order/byEmail/:email", async (request, reply) => {
+
+    const { email } = request.params;
+
+    const order = await ordersCtrl.getOrdersByUserEmail(email);
+
+    reply.send(order);
+});
+
+
+fastify.get("/api/order/:id", async (request, reply) => {
+
+    const { id } = request.params;
+
+    const order = await ordersCtrl.getOrder(id);
+
+    reply.send(order);
+});
+
+
+fastify.patch("/api/order", async function(request, reply) {
+
+    const order = {
+        id : request.body.id,
+        userId: request.body.userId,
+        orderName: request.body.orderName,
+        status: request.body.status,
+        amount: request.body.amount
+    }
+
+    const orders = await ordersCtrl.updateOrder(order);
+
+    return orders;
+
+});
+
+
+fastify.delete("/api/order/:id", async (request, reply) => {
+
+    const { id } = request.params;
+
+    const order = await ordersCtrl.removeOrder(id);
+
+    reply.send(order);
+});
+
+
+fastify.get("/api/order/", async (request, reply) => {
+
+    if (request.query.order === undefined) throw new Error(`Email needs to be set, we recieved  ${typeof request.query.order}`)
+
+    try {
+        const order = await ordersCtrl.getOrder(request.query.id);
+
+        reply.send(order);
+
+    } catch (error) {
+
+        reply.status(404).send({ error: true, errorMessage : error.toString() });
+    }
+});
 
 
 fastify.get("/api/siret", (request, reply) => reply.send(siretCtrl.createSirenData(request.query.domainName)));

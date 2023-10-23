@@ -38,24 +38,14 @@ exports.getContactIdFromEmail = async (email) => {
 
 
 
-
-
-
-/*
-curl --request PATCH \
-  --url 'https://api.hubapi.com/crm/v3/objects/contacts/?hapikey=YOUR_HUBSPOT_API_KEY' \
-  --header 'content-type: application/json' \
-  --data '{
-  "properties": {
-    "company": "Biglytics",
-    "email": "bcooper@biglytics.net",
-    "firstname": "Bryan",
-    "lastname": "Cooper",
-    "phone": "(877) 929-0687",
-    "website": "biglytics.net"
-  }
-}'
-*/
+/**
+ * Update a contact in HubSpot CRM by contact ID.
+ *
+ * @param {string} contactId - The ID of the contact to be updated.
+ * @param {Object} properties - An object containing the properties to be updated for the contact.
+ * @returns {Promise} - A promise that resolves with the result of the update operation.
+ * @throws {Error} - If no API key is set up.
+ */
 exports.updateContactByContactId = (contactId, properties) => {
 
     if (!apiKey) throw new Error(`There's not API key setup`);
