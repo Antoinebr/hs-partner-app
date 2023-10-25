@@ -446,6 +446,16 @@ fastify.get("/api/parcelNumber/", async (request, reply) => {
 
 
 
+fastify.get("/hello", async (request, reply) => {
+;
+
+    const parcelNumber = {
+        hello: 'my friend :)'
+    }
+
+    reply.send(parcelNumber);
+
+});
 
 let remainingFailures = 10;
 fastify.get("/api/status/", async (request, reply) => {

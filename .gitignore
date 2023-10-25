@@ -19,3 +19,6 @@ variables.env.now
 dbManager.js
 garages.json
 users.json
+
+*.sh
+

@@ -338,4 +338,41 @@ document.querySelector('#placeOrder')?.addEventListener("submit", async (event) 
 
 // localStorage.setItem('identificationEmail',emailInput.value);
 // localStorage.setItem('identificationToken',data.token);
-            
+
+
+
+ 
+
+if(document.getElementById("openPopup")){
+
+  const openButton = document.getElementById("openPopup");
+  const closeButton = document.getElementById("closePopup");
+  const popup = document.getElementById("popup");
+
+
+  // Function to open the pop-up
+  function openPopup() {
+      popup.classList.remove("hidden");
+      popup.classList.add("flex");
+      document.body.style.overflow = "hidden"; // Prevent scrolling when the pop-up is open
+  }
+
+  // Function to close the pop-up
+  function closePopup() {
+      popup.classList.remove("flex");
+      popup.classList.add("hidden");
+      document.body.style.overflow = "auto"; // Allow scrolling when the pop-up is closed
+  }
+
+  // Event listeners
+  openButton.addEventListener("click", openPopup);
+  closeButton.addEventListener("click", closePopup);
+
+  // Close the pop-up if the user clicks outside the pop-up content
+  popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+          closePopup();
+      }
+  });
+
+}

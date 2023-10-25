@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
+    "deploy" : "./syncAll.sh && ./restartProd.sh",
     "prod:restart": "forever restart server.js",
     "prod:start": "forever start server.js",
     "prod:logs" : "forever logs server.js -f"
