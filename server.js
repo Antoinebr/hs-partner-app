@@ -55,14 +55,14 @@ fastify.register(require("point-of-view"), {
 });
 
 // Load and parse SEO data
-const seo = require("./src/seo.json");
+const seoCtrl = require("./src/seo");
 
 
 fastify.get("/", function(request, reply) {
 
     reply.view("/src/pages/home.hbs", {
         data: [],
-        seo
+        seo : seoCtrl.getUrlData('/')
     });
 });
 
@@ -71,6 +71,7 @@ fastify.get("/", function(request, reply) {
 fastify.get("/customer-service", function(request, reply) {
     reply.view("/src/pages/customer-service.hbs", {
         data: [],
+        seo : seoCtrl.getUrlData('/customer-service')
     });
 });
 
@@ -87,6 +88,7 @@ fastify.get("/contact", function(request, reply) {
 fastify.get("/about", function(request, reply) {
     reply.view("/src/pages/about.hbs", {
         data: [],
+        seo : seoCtrl.getUrlData('/about')
     });
 });
 
@@ -145,7 +147,7 @@ fastify.get("/editUser/:email", async (request, reply) => {
     reply.view("/src/pages/user.hbs", {
         user,
         orders,
-        seo
+        seo : seoCtrl.getUrlData('/users/')
     });
 
 });
@@ -244,13 +246,8 @@ fastify.get("/api/user/", async (request, reply) => {
 
 fastify.get("/addUser/", async (request, reply) => {
 
-    // params is an object we'll pass to our handlebars template
-    let params = {
-        seo: seo
-    };
-
     reply.view("/src/pages/add-user.hbs", {
-        seo
+        seo : seoCtrl.getUrlData('/users')
     });
 
 });
@@ -370,7 +367,8 @@ fastify.get('/mytickets/', async (request, reply) => {
     const tickets = await hubSpotAPI.displayAllTickets();
 
     reply.view("/src/pages/tickets.hbs", {
-        tickets
+        tickets,
+        seo : seoCtrl.getUrlData('/mytickets/')
     });
 
 });
@@ -386,7 +384,8 @@ fastify.get('/mytickets/:id', async (request, reply) => {
     const tickets = await hubSpotAPI.getTicket(id);
 
     reply.view("/src/pages/ticket.hbs", {
-        tickets
+        tickets,
+        seo : seoCtrl.getUrlData('/mytickets/')
     });
 
 });
@@ -408,6 +407,215 @@ fastify.get('/conversations/', async (request, reply) => {
 });
 
 
+/**
+ * 
+ *  Devices 
+ * 
+ */
+
+fastify.get('/api/devices/:id', async (request, reply) => {
+
+    const {
+        id
+    } = request.params;
+
+    const deviceInfo = {
+        "35730": {
+            "brand": "Google",
+            "model": "Pixel 3XL",
+            "image" : "https://static.fnac-static.com/multimedia/Images/FR/MDM/2c/bc/52/22199340/1520-1/tsp20231110173112/Smartphone-Google-Pixel-8-Pro-6-7-5G-Double-SIM-128-Go-Noir.jpg",
+            "releaseYear": 2018,
+            "display": {
+                "type": "OLED",
+                "size": 6.3,
+                "resolution": "1440 x 2960 pixels"
+            },
+            "processor": {
+                "name": "Qualcomm Snapdragon 845",
+                "cores": 8,
+                "clockSpeed": "2.5 GHz"
+            },
+            "ram": "4 GB",
+            "storage": {
+                "internal": "64/128 GB",
+                "expandable": false
+            },
+            "camera": {
+                "main": {
+                    "resolution": "12.2 MP",
+                    "aperture": "f/1.8",
+                    "videoRecording": "4K at 30/60fps"
+                },
+                "front": {
+                    "resolution": "8 MP + 8 MP (wide)",
+                    "aperture": "f/1.8 + f/2.2"
+                }
+            },
+            "battery": {
+                "capacity": "3430 mAh",
+                "type": "Non-removable Li-Ion"
+            },
+            "operatingSystem": "Android 9.0 (Pie), upgradable to Android 11",
+            "dimensions": {
+                "height": 158,
+                "width": 76.7,
+                "thickness": 7.9
+            },
+            "weight": 184,
+            "features": [
+                "Fingerprint sensor (rear-mounted)",
+                "IP68 dust/water resistant",
+                "Wireless charging",
+                "Active Edge"
+            ],
+            "colors": ["Just Black", "Clearly White", "Not Pink"]
+        },
+
+        "35000": {
+            "brand": "Apple",
+            "model": "iPhone 12",
+            "releaseYear": 2020,
+            "image" : "https://static.fnac-static.com/multimedia/Images/FR/MDM/c2/b2/bd/12432066/1540-1/tsp20231116133346/Apple-iPhone-12-6-1-64-Go-Double-SIM-5G-Noir.jpg",
+            "display": {
+                "type": "Super Retina XDR OLED",
+                "size": 6.1,
+                "resolution": "1170 x 2532 pixels"
+            },
+            "processor": {
+                "name": "Apple A14 Bionic",
+                "cores": 6,
+                "clockSpeed": "2.99 GHz"
+            },
+            "ram": "4 GB",
+            "storage": {
+                "internal": "64/128/256 GB",
+                "expandable": false
+            },
+            "camera": {
+                "main": {
+                    "resolution": "12 MP (wide) + 12 MP (ultrawide)",
+                    "aperture": "f/1.6 + f/2.4",
+                    "nightMode": true,
+                    "videoRecording": "4K at 24/30/60fps"
+                },
+                "front": {
+                    "resolution": "12 MP",
+                    "aperture": "f/2.2",
+                    "nightMode": true
+                }
+            },
+            "battery": {
+                "capacity": "2815 mAh",
+                "type": "Non-removable Li-Ion"
+            },
+            "operatingSystem": "iOS 14, upgradable to the latest iOS version",
+            "dimensions": {
+                "height": 146.7,
+                "width": 71.5,
+                "thickness": 7.4
+            },
+            "weight": 164,
+            "features": [
+                "Face ID",
+                "MagSafe technology",
+                "5G connectivity",
+                "Water and dust resistance (IP68)"
+            ],
+            "colors": ["Black", "White", "Green", "Blue", "Red"]
+        },
+        "35400": {
+            "brand": "Apple",
+            "model": "iPhone 12",
+            "releaseYear": 2020,
+            "image" : "https://static.fnac-static.com/multimedia/Images/FR/MDM/c2/b2/bd/12432066/1540-1/tsp20231116133346/Apple-iPhone-12-6-1-64-Go-Double-SIM-5G-Noir.jpg",
+            "display": {
+                "type": "Super Retina XDR OLED",
+                "size": 6.1,
+                "resolution": "1170 x 2532 pixels"
+            },
+            "processor": {
+                "name": "Apple A14 Bionic",
+                "cores": 6,
+                "clockSpeed": "2.99 GHz"
+            },
+            "ram": "4 GB",
+            "storage": {
+                "internal": "64/128/256 GB",
+                "expandable": false
+            },
+            "camera": {
+                "main": {
+                    "resolution": "12 MP (wide) + 12 MP (ultrawide)",
+                    "aperture": "f/1.6 + f/2.4",
+                    "nightMode": true,
+                    "videoRecording": "4K at 24/30/60fps"
+                },
+                "front": {
+                    "resolution": "12 MP",
+                    "aperture": "f/2.2",
+                    "nightMode": true
+                }
+            },
+            "battery": {
+                "capacity": "2815 mAh",
+                "type": "Non-removable Li-Ion"
+            },
+            "operatingSystem": "iOS 14, upgradable to the latest iOS version",
+            "dimensions": {
+                "height": 146.7,
+                "width": 71.5,
+                "thickness": 7.4
+            },
+            "weight": 164,
+            "features": [
+                "Face ID",
+                "MagSafe technology",
+                "5G connectivity",
+                "Water and dust resistance (IP68)"
+            ],
+            "colors": ["Black", "White", "Green", "Blue", "Red"]
+        }
+
+    };
+
+    reply.send([deviceInfo[id]])
+
+});
+
+fastify.get('/api/devices/replacement', async (request, reply) => {
+
+    reply.send([{
+        label: `iPhone 13 Max`,
+        value: `1200€`,
+        initialIsChecked: true,
+        readonly: false,
+        description: `2 - 3 days`,
+      },
+      {
+        label: `Google Pixel 8 pro`,
+        value: `800€`,
+        initialIsChecked: false,
+        readonly: false,
+        description: `1 day`,
+      },
+      {
+        label: `Nokia 3310`,
+        value: `20€`,
+        initialIsChecked: false,
+        readonly: false,
+        description: `3 days`,
+      }])
+
+});
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -415,10 +623,11 @@ fastify.get('/conversations/', async (request, reply) => {
  *  parcels 
  * 
  */
-
 fastify.get('/my-parcel/', async (request, reply) => {
 
-    reply.view("/src/pages/my-parcel.hbs");
+    reply.view("/src/pages/my-parcel.hbs",{
+        seo : seoCtrl.getUrlData('/my-parcel/')
+    });
 
 });
 

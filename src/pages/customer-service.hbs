@@ -63,18 +63,26 @@
             <section class="px-9 flex flex-row">
 
                 <section class="basis-1/3 pr-8">
-                    <button id="generalQuestion" class="form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">I have a general question </button>
+                    <button id="generalQuestion" class="text-xs form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">General question </button>
                 </section>
 
                 <section class="basis-1/3 pr-8">
-                    <button id="productIssue" class="form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl"> I have a product Issue </button>
+                    <button id="productIssue" class="text-xs form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl"> I have a product Issue </button>
                 </section>
 
                 <section class="basis-1/3 pr-8">
-                    <button id="billingIssue" class="form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">I have a billing Issue </button>
+                    <button id="billingIssue" class="text-xs form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">I have a billing Issue </button>
                 </section>
 
+                 <section class="basis-1/3 pr-8">
+                    <button id="contractIssue" class=" text-xs form-button mt-10 bg-pink text-white h-12 max-w-ful inline-block text-center rounded-md px-20 py-3 filter drop-shadow-xl">I have a contract Issue </button>
+                </section>
+
+    
             </section>
+
+
+
 
 
             <hr/ class="m-10">
@@ -145,6 +153,27 @@
                             portalId: "21250603",
                             formId: "27a7ba3d-4ac9-419f-9ebe-dca9f69157a2"
                         });
+                    </script>
+
+                </section>
+
+                <section class="w-1/3 m-auto hidden" id="contractIssueForm">
+                    <p class="text-2xl font-bold pb-1">Contract Issue : </p>
+
+                    <p class="text-sm text-gray-500"> If you didn't know this form will create a ticket and then the ticket will be analyzed and categorized based on the body of the request.
+                        Indeed if the request contains words like "billing", this ticket will have the "billing issue" category.
+                        This is pretty cool and this shows how powerful can be service hub.
+                    </p>
+
+                    <hr/ class="m-10">
+
+                    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                    <script>
+                    hbspt.forms.create({
+                        region: "na1",
+                        portalId: "21250603",
+                        formId: "49f54ece-0c64-4cb6-928e-7a0e6e0714d9"
+                    });
                     </script>
 
                 </section>

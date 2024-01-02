@@ -91,6 +91,19 @@ exports.getUser = async (email) => {
 }
 
 
+exports.getUserById = async (id) => {
+
+    //if (typeof email !== "string") throw new Error(`We exepected a string as email, we go ${email}`);
+
+    const user = await Users.getUserById(id);
+
+    if (!user) throw new Error(`No user found for ${id}`);
+
+    return user;
+}
+
+
+
 /**
  * Add a new user to the system.
  *

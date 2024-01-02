@@ -95,6 +95,23 @@ exports.updateContactByContactId = async (contactId, properties) => {
 }
 
 
+exports.associateDealWithContact = async (dealId, toObjectID) => {
+
+    const endpoint = "https://api.hubapi.com/crm/v3/associations/deals/contacts/batch/create";
+
+    return await axios.post(endpoint, {
+        "inputs": [{
+            "from": {
+                "id": dealId
+            },
+            "to": {
+                "id": toObjectID
+            },
+            "type": "deal_to_contact"
+        }]
+    }, axiosConfig);
+}
+
 
 
 
@@ -253,15 +270,26 @@ exports.authVisitor = async (email) => {
     const postData = {
         email
     };
-    
+
     const response = await axios.post(url, postData, axiosConfig).catch(axiosErrorHandler)
 
-    if(!response) throw new Error(`API didn't respond...`)
+    if (!response) throw new Error(`API didn't respond...`)
 
-    if(!response.data) throw new Error(`API didn't respond with data ...`)
+    if (!response.data) throw new Error(`API didn't respond with data ...`)
 
-    if(!response.data.token) throw new Error(`API didn't respond with a token ...`)
+    if (!response.data.token) throw new Error(`API didn't respond with a token ...`)
 
     return response.data.token;
 
 }
+
+
+
+exports.adddeal = async (properties) => {
+
+    if (!privateAppToken) throw new Error(`There's not privateAppToken setup`);
+
+    const endpoint = `https://api.hubapi.com/crm/v3/objects/deals`;
+
+    return await axios.post(endpoint, properties, axiosConfig);
+};

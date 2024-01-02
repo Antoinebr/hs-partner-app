@@ -213,6 +213,25 @@ document.querySelector('#billingIssue')?.addEventListener('click', async e => {
 
 
 
+document.querySelector('#contractIssue')?.addEventListener('click', async e => {
+
+    document.querySelector('#contractIssueForm').classList.toggle('hidden');
+
+
+    // if the form is visible then scroll to the form
+    if( document.querySelector('#contractIssueForm').classList.contains('hidden') === false ){
+
+        document.getElementById("contractIssueForm").scrollIntoView({
+            block: 'nearest',
+            behavior: 'smooth',
+            inline: 'start'
+        });
+
+    }
+});
+
+
+
 
 document.querySelector('#login')?.addEventListener("submit", async (event) => {
 

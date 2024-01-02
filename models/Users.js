@@ -85,6 +85,15 @@ exports.getUser = async (email) => {
     return result;
 }
 
+exports.getUserById = async (id) => {
+
+    const result = await db.get("SELECT * FROM Users WHERE id = $id", {
+        $id: id
+    });
+
+    return result;
+}
+
 
 /**
  * Delete a user from the Users table by their email.

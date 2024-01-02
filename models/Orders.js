@@ -66,7 +66,7 @@ exports.getOrdersByUserEmail = async (email) => {
         WHERE Users.email = "${email}"
 
     `, {
-        $userId: userId
+        $email: email
     });
 
     return result;

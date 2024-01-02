@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "deploy" : "./syncAll.sh && ./restartProd.sh",
+    "deploy": "./syncAll.sh && ./restartProd.sh",
     "prod:restart": "forever restart server.js",
     "prod:start": "forever start server.js",
-    "prod:logs" : "forever logs server.js -f"
+    "prod:logs": "forever logs server.js -f"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -20,7 +20,7 @@
     "handlebars": "^4.7.7",
     "point-of-view": "^5.0.0",
     "promised-sqlite3": "^1.2.0",
-    "sqlite3": "^5.1.2"
+    "sqlite3": "^5.1.6"
   },
   "engines": {
     "node": "12.x"
