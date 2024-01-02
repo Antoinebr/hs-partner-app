@@ -38,9 +38,9 @@
 
                 <div class="bg-white h-5/5 px-9 py-9">
 
-                    <p class="text-4xl font-light ">My list of users</p>
+                    <p class="text-4xl font-light ">Nos utilisateurs</p>
 
-                    <p class="text-4xl font-bold pb-4">From my own software / Database </p>
+                    <p class="text-4xl font-bold pb-4">De notre SASS / base de données </p>
 
                     <p class="leading-8 text-gray-500 mt-8"> Lorem ipsum dolor sit met, qui at desert mandamus, adduce ullum
                         apeirian mea at. Eu mel vide saltando vituperata, sonet quidam deterruisset te qui. Lorem ipsum dolor sit
@@ -50,7 +50,7 @@
 
 
                     <section class="flex">
-                        <a href="/addUser/" class="ml-auto text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add a user</a>
+                        <a href="/addUser/" class="ml-auto text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Ajouter un utilisateur</a>
                     </section>
 
 
@@ -64,13 +64,13 @@
                                     <div class="content px-4">
                                         <p class="text-l font-bold mt-3 mb-2">{{this.name}} {{this.lastname}}</p>
                                         <p class="text-xs mt-3 mb-2"> <span class="font-bold">Email : </span>{{this.email}} </p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Token Availables : </span>
+                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Crédits disponibles : </span>
                                             {{this.tokensAvailable}} </p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Car Driven : </span> {{this.carManufacturer}} </p>
-                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Car Model : </span> {{this.carModel}}</p>
-                                        <p class="text-xs text-gray-500 text-right"><a href="/editUser/{{this.email}}">Edit</a></p>
+                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Constructeur : </span> {{this.carManufacturer}} </p>
+                                        <p class="text-xs mt-3 mb-2"> <span class="font-bold">Model de la voiture : </span> {{this.carModel}}</p>
+                                        <p class="text-xs text-gray-500 text-right"><a href="/editUser/{{this.email}}">Modifier</a></p>
                                         <p class="text-xs text-gray-500 text-right"><a href="/api/user/{{this.email}}">API endpoint</a></p>
-                                        <p class="text-xs text-gray-500 text-right"><a href="/api/user/?email={{this.email}}">API w query params</a></p>
+                                        <p class="text-xs text-gray-500 text-right"><a href="/api/user/?email={{this.email}}">API endpoint avec params</a></p>
                                     </div>
                                 </article>
 
