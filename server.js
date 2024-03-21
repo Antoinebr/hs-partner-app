@@ -366,6 +366,7 @@ fastify.get('/mytickets/', async (request, reply) => {
 
     const tickets = await hubSpotAPI.displayAllTickets();
 
+
     reply.view("/src/pages/tickets.hbs", {
         tickets,
         seo : seoCtrl.getUrlData('/mytickets/')
@@ -383,8 +384,17 @@ fastify.get('/mytickets/:id', async (request, reply) => {
 
     const tickets = await hubSpotAPI.getTicket(id);
 
+
+    const {data} = await hubSpotAPI.getAssociatedEmailsFromTicketId(id);
+
+
+    const emailsInTicket = data;
+    
+    console.log("email",id, emailsInTicket);
+
     reply.view("/src/pages/ticket.hbs", {
         tickets,
+        emailsInTicket,
         seo : seoCtrl.getUrlData('/mytickets/')
     });
 

@@ -259,6 +259,17 @@ exports.getTicket = async (id = null) => {
 }
 
 
+exports.getAssociatedEmailsFromTicketId = async (id) => {
+
+    const endpoint = `https://api.hubapi.com/crm/v4/objects/tickets/${id}/associations/emails`;
+
+    console.log(endpoint);
+    
+    return axios.get(endpoint, axiosConfig);
+}
+
+
+
 
 
 exports.authVisitor = async (email) => {

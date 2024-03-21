@@ -8,10 +8,13 @@ const Users = require('../models/Users');
 
 const hubSpotAPI = require('../apis/hubSpot.js');
 
+
+/**
+ * Update an order list
+ * @param {Object} order - The order object to update
+ * @returns {Promise<{ changes }>} A promise that resolves to an object containing the number of changes made to the order
+ */
 exports.updateOrder = async (order) => {
-
-
-    console.log(order);
 
     if (!order) throw new Error("You have to pass an order");
 
@@ -38,7 +41,10 @@ exports.updateOrder = async (order) => {
 
 
 
-
+/**
+ * Get all orders in the list
+ * @returns {Promise<Array>} A promise that resolves to an array of order objects
+ */
 exports.getAllOrders = async () => {
 
     const orders = await Orders.getOrders();
@@ -47,7 +53,11 @@ exports.getAllOrders = async () => {
 }
 
 
-
+/**
+ * Remove an order from the list
+ * @param {String} id - The ID of the order to remove
+ * @returns {Promise<Object>} A promise that resolves to the destroyed order object
+ */
 exports.removeOrder = async (id) => {
 
     if (!id || id === "") throw new Error("You can't remove an order without providing an order id  ");
@@ -71,6 +81,11 @@ exports.getOrder = async (id) => {
 }
 
 
+/**
+ * Get an order from the list by ID
+ * @param {String} id - The ID of the order to retrieve
+ * @returns {Promise<Object>} A promise that resolves to the retrieved order object
+ */
 exports.getOrdersByUserId = async (id) => {
 
     if (!id) throw new Error(`We exepected an id in ordersCtrl exports.getOrdersByUserId(id), we go ${id}`);
@@ -88,6 +103,11 @@ exports.getOrdersByUserId = async (id) => {
 }
 
 
+/**
+ * Get all orders by user email
+ * @param {String} email - The user's email address
+ * @returns {Promise<Array>} A promise that resolves to an array of order objects
+ */
 exports.getOrdersByUserEmail = async (email) => {
 
     if (!email) throw new Error(`We exepected an email in ordersCtrl exports.getOrdersByUserEmail(emil), we go ${email}`);
@@ -106,6 +126,11 @@ exports.getOrdersByUserEmail = async (email) => {
 }
 
 
+/**
+ * Add a new order 
+ * @param {Object} order - The order object to add
+ * @returns {Promise<Object>} A promise that resolves to the added order object
+ */
 exports.addOrder = async (order) => {
 
     if (!order) throw new Error(`There's no user`);
@@ -136,12 +161,13 @@ exports.addOrder = async (order) => {
                 "pipeline": "default"
             },
             // association here doesn't work 
-            "associations": [{
-                "to": {
-                    "id": 8501
-                },
-                "type": "0-1"
-            }]
+            // "associations": [{
+            //     "to": {
+            //         "id": 8501
+            //     },
+            //     "type": "0-1"
+            // }
+            // ]
         }).catch(console.log)
 
         await hubSpotAPI.associateDealWithContact(deal.data.id, parseInt(results[0].id));

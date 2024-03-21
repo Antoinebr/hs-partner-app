@@ -1,7 +1,10 @@
+/**
+ * Check if the request is authenticated
+ * @param {Object} req - The HTTP request object
+ * @param {Object} reply - The response object
+ * @param {Function} done - A callback function to call when the authentication check is complete
+ */
 exports.checkIfAuthenticated = (req, reply, done) => {
-    
-    
-    console.log( req.headers['user-agent'],'  ',req.method, req.url);
     
     const protectedRoutes = ['/api/user'];
 
