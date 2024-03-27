@@ -47,7 +47,7 @@
                                         <p class="text-l font-bold mt-3 mb-2">{{tickets.properties.subject}} </p>
                                         <p class="text-xs mt-3 mb-2"> {{{tickets.properties.content}}}</p>
                                        
-                                        <p class="text-xs mt-3 mb-2">{{tickets.properties.createdate}}</p>
+                                        <p class="text-xs mt-3 mb-2">{{formatDate tickets.properties.createdate}}</p>
                                     </div>
                                 </article>                     
                         {{/if}}

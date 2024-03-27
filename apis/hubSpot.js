@@ -248,7 +248,7 @@ exports.displayAllTickets = async () => {
 
     const response = await axios.get(apiUrl, {
         headers: {
-            authorization: `Bearer ${process.env.privateAppTokenPartner}`
+            authorization: `Bearer ${process.env.privateAppToken}`
         }
     }).catch(console.log);
 
@@ -274,7 +274,7 @@ exports.getTicket = async (id = null) => {
 
     const response = await axios.get(apiUrl, {
         headers: {
-            authorization: `Bearer ${process.env.privateAppTokenPartner}`
+            authorization: `Bearer ${process.env.privateAppToken}`
         }
     }).catch(console.log);
 

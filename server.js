@@ -19,6 +19,8 @@ const fastify = require("fastify")({
 
 
 
+
+
 // Setup our static files
 fastify.register(require("fastify-static"), {
     root: path.join(__dirname, "public"),
@@ -45,8 +47,12 @@ fastify.addHook('preHandler', routesConfig.checkIfAuthenticated);
  * 
  */
 const handlebars = require("handlebars");
+require('./utils/handlebarsHelpers.js');
 handlebars.registerPartial('menu', fs.readFileSync(path.join(__dirname, '/src/pages/partials/menu.hbs'), 'utf8'));
 handlebars.registerPartial('footer', fs.readFileSync(path.join(__dirname, '/src/pages/partials/footer.hbs'), 'utf8'));
+
+
+
 // point-of-view is a templating manager for fastify
 fastify.register(require("point-of-view"), {
     engine: {
@@ -410,11 +416,10 @@ fastify.get('/mytickets/:id', async (request, reply) => {
     const tickets = await hubSpotAPI.getTicket(id);
 
 
-    const emailsInTicket = await hubSpotAPI.getAllEmailsFromTicketId(id);
+    //const emailsInTicket = await hubSpotAPI.getAllEmailsFromTicketId(id);
 
     reply.view("/src/pages/ticket.hbs", {
         tickets,
-        emailsInTicket,
         seo: seoCtrl.getUrlData('/mytickets/')
     });
 
