@@ -168,13 +168,37 @@ exports.syncTestWithHubSpot = async () => {
 
 exports.getAllTickets = async () => {
 
-
     const response = await axios.post('https://api.hubspot.com/crm/v3/objects/tickets/search', {
         filterGroups: [{
             filters: [{
                 propertyName: 'hs_ticket_requester_email',
                 operator: 'EQ',
                 value: 'abrossault@hubspot.com'
+            }]
+        }],
+        "properties": [
+            "name"
+        ],
+    }, axiosConfig).catch(console.log)
+
+    // Le tableau de tickets en statut "open" pour le contact spécifié se trouve dans response.data.results
+    const openTickets = response.data.results;
+
+    return openTickets;
+
+}
+
+
+exports.getTicketsFromUserEmail = async (email) => {
+
+    if(!email) throw new Error('Email is required');
+
+    const response = await axios.post('https://api.hubspot.com/crm/v3/objects/tickets/search', {
+        filterGroups: [{
+            filters: [{
+                propertyName: 'hs_ticket_requester_email',
+                operator: 'EQ',
+                value: email
             }]
         }],
         "properties": [
@@ -269,6 +293,64 @@ exports.getAssociatedEmailsFromTicketId = async (id) => {
 }
 
 
+
+exports.getAllEmailsFromTicketId = async (ticketId) => {
+    let fetchedEmails = []; // Initialize fetchedEmails as an empty array
+    try {
+      const initialEmailResponse = await axios({
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: `https://api.hubapi.com/crm/v4/objects/ticket/${ticketId}/associations/email`,
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${process.env.privateAppTokenPartner}`
+        },
+      });
+    
+      console.log("Initial Email Response:", initialEmailResponse.data);
+    
+      // Extract email ID's from the initial email response
+      const emailIds = initialEmailResponse.data.results;
+    
+      console.log("Email IDs:", emailIds);
+    
+      const emailIdInputs = emailIds.map(email => ({
+        id: email.toObjectId.toString()
+      }));
+      
+      const emailBodyResponse = await axios({
+        method: 'post',
+        url: 'https://api.hubapi.com/crm/v3/objects/emails/batch/read',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${process.env.privateAppTokenPartner}`
+        },
+        data: JSON.stringify({
+          idProperty: 'hs_object_id',
+          inputs: emailIdInputs,
+          properties: [
+            'hs_email_subject',
+            'hs_email_text'
+          ]
+        })
+      });
+    
+      console.log("Email Body Response:", emailBodyResponse.data);
+    
+      // Process response to extract hs_email_subject and hs_email_text properties
+      fetchedEmails = emailBodyResponse.data.results.map(result => ({
+        subject: result.properties.hs_email_subject,
+        id: result.properties.hs_email_text
+      }));
+    
+      console.log("Fetched Emails:", fetchedEmails);
+
+      return  fetchedEmails;
+
+    }catch (e){
+        console.log(e);
+    }
+}
 
 
 

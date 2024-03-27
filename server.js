@@ -362,6 +362,25 @@ fastify.get("/api/siret", (request, reply) => reply.send(siretCtrl.createSirenDa
  * 
  */
 
+fastify.get('/ticketFromUser/:email', async (request, reply) => {
+
+    const {
+        email
+    } = request.params;
+
+
+
+    reply.send(email);
+
+    if(!email) throw new Error('Email is needed');
+
+    const ticket = await hubSpotAPI.getTicketsFromUserEmail(email);
+
+    reply.send(ticket);
+
+
+});
+
 fastify.get('/mytickets/', async (request, reply) => {
 
     const tickets = await hubSpotAPI.displayAllTickets();
@@ -385,12 +404,7 @@ fastify.get('/mytickets/:id', async (request, reply) => {
     const tickets = await hubSpotAPI.getTicket(id);
 
 
-    const {data} = await hubSpotAPI.getAssociatedEmailsFromTicketId(id);
-
-
-    const emailsInTicket = data;
-    
-    console.log("email",id, emailsInTicket);
+    const emailsInTicket = await hubSpotAPI.getAllEmailsFromTicketId(id);
 
     reply.view("/src/pages/ticket.hbs", {
         tickets,
