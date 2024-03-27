@@ -355,16 +355,16 @@ exports.getAllEmailsFromTicketId = async (ticketId) => {
             url: `https://api.hubapi.com/crm/v4/objects/ticket/${ticketId}/associations/email`,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.privateAppTokenPartner}`
+                'Authorization': `Bearer ${process.env.privateAppToken}`
             },
         });
 
-        console.log("Initial Email Response:", initialEmailResponse.data);
+        //console.log("Initial Email Response:", initialEmailResponse.data);
 
         // Extract email ID's from the initial email response
         const emailIds = initialEmailResponse.data.results;
 
-        console.log("Email IDs:", emailIds);
+        //console.log("Email IDs:", emailIds);
 
         const emailIdInputs = emailIds.map(email => ({
             id: email.toObjectId.toString()
@@ -375,7 +375,7 @@ exports.getAllEmailsFromTicketId = async (ticketId) => {
             url: 'https://api.hubapi.com/crm/v3/objects/emails/batch/read',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.privateAppTokenPartner}`
+                'Authorization': `Bearer ${process.env.privateAppToken}`
             },
             data: JSON.stringify({
                 idProperty: 'hs_object_id',
@@ -387,7 +387,7 @@ exports.getAllEmailsFromTicketId = async (ticketId) => {
             })
         });
 
-        console.log("Email Body Response:", emailBodyResponse.data);
+        // console.log("Email Body Response:", emailBodyResponse.data);
 
         // Process response to extract hs_email_subject and hs_email_text properties
         fetchedEmails = emailBodyResponse.data.results.map(result => ({
@@ -395,7 +395,7 @@ exports.getAllEmailsFromTicketId = async (ticketId) => {
             id: result.properties.hs_email_text
         }));
 
-        console.log("Fetched Emails:", fetchedEmails);
+        //console.log("Fetched Emails:", fetchedEmails);
 
         return fetchedEmails;
 

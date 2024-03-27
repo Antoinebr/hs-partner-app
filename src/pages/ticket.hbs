@@ -52,6 +52,25 @@
                                 </article>                     
                         {{/if}}
 
+
+
+                        {{#if emails}}
+                            {{#each emails}}        
+                   
+                                    <article class="filter border drop-shadow-xl rounded-2xl overflow-hidden relative">
+                                        <div class="content px-4">
+                                            <p class="text-l font-bold mt-3 mb-2">{{this.subject}}</p>
+                                            <p class="text-xs mt-3 mb-2"> {{{this.id}}}</p>
+                                        </div>
+                                    </article>
+                 
+                            {{/each}}
+                        {{/if}}
+
+
+
+                        
+
                     </section>
 
                 </div>

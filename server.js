@@ -230,6 +230,7 @@ fastify.patch("/api/user", async function(request, reply) {
 
 });
 
+
 fastify.delete("/api/user/:email", async (request, reply) => {
 
     const { email } = request.params;
@@ -238,6 +239,7 @@ fastify.delete("/api/user/:email", async (request, reply) => {
 
     reply.send(user);
 });
+
 
 fastify.get("/api/user/", async (request, reply) => {
 
@@ -273,8 +275,6 @@ fastify.get("/users", async (request, reply) => {
     });
 
 });
-
-
 
 
 
@@ -383,7 +383,6 @@ fastify.get('/ticketFromUser/:email', async (request, reply) => {
     } = request.params;
 
 
-
     if (!email) throw new Error('Email is needed');
 
     const ticket = await hubSpotAPI.getTicketsFromUserEmail(email);
@@ -415,11 +414,14 @@ fastify.get('/mytickets/:id', async (request, reply) => {
 
     const tickets = await hubSpotAPI.getTicket(id);
 
+    const emails = await hubSpotAPI.getAllEmailsFromTicketId(id);
+
 
     //const emailsInTicket = await hubSpotAPI.getAllEmailsFromTicketId(id);
 
     reply.view("/src/pages/ticket.hbs", {
         tickets,
+        emails,
         seo: seoCtrl.getUrlData('/mytickets/')
     });
 

@@ -281,7 +281,7 @@ document.querySelector('#login')?.addEventListener("submit", async (event) => {
                 console.log("Password is correct ! JWT set in localstorage !")
                 localStorage.setItem('JWT',JWT);
             }
-            window.location.replace("/users");
+            window.location.replace("/editUser/carey85@gmail.com");
 
 
     } catch (error) {
