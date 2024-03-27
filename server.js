@@ -62,7 +62,7 @@ fastify.get("/", function(request, reply) {
 
     reply.view("/src/pages/home.hbs", {
         data: [],
-        seo : seoCtrl.getUrlData('/')
+        seo: seoCtrl.getUrlData('/')
     });
 });
 
@@ -71,7 +71,7 @@ fastify.get("/", function(request, reply) {
 fastify.get("/customer-service", function(request, reply) {
     reply.view("/src/pages/customer-service.hbs", {
         data: [],
-        seo : seoCtrl.getUrlData('/customer-service')
+        seo: seoCtrl.getUrlData('/customer-service')
     });
 });
 
@@ -88,7 +88,7 @@ fastify.get("/contact", function(request, reply) {
 fastify.get("/about", function(request, reply) {
     reply.view("/src/pages/about.hbs", {
         data: [],
-        seo : seoCtrl.getUrlData('/about')
+        seo: seoCtrl.getUrlData('/about')
     });
 });
 
@@ -137,17 +137,22 @@ fastify.get("/editUser/:email", async (request, reply) => {
 
     const user = await usersCtrl.getUser(email);
 
-    const {ID} = user;
+    const { ID } = user;
 
     const orders = await ordersCtrl.getOrdersByUserId(ID);
 
     orders.stringify = JSON.stringify(orders);
 
-    
+     
+    const tickets = await usersCtrl.getUserTickets(email);
+
+    // Get Tickets from HubSpot API 
+
     reply.view("/src/pages/user.hbs", {
         user,
         orders,
-        seo : seoCtrl.getUrlData('/users/')
+        tickets,
+        seo: seoCtrl.getUrlData('/users/')
     });
 
 });
@@ -239,7 +244,7 @@ fastify.get("/api/user/", async (request, reply) => {
 
     } catch (error) {
 
-        reply.status(404).send({ error: true, errorMessage : error.toString() });
+        reply.status(404).send({ error: true, errorMessage: error.toString() });
     }
 
 });
@@ -247,7 +252,7 @@ fastify.get("/api/user/", async (request, reply) => {
 fastify.get("/addUser/", async (request, reply) => {
 
     reply.view("/src/pages/add-user.hbs", {
-        seo : seoCtrl.getUrlData('/users')
+        seo: seoCtrl.getUrlData('/users')
     });
 
 });
@@ -293,6 +298,9 @@ fastify.get("/api/order/byEmail/:email", async (request, reply) => {
 
     const { email } = request.params;
 
+    console.log(email);
+
+
     const order = await ordersCtrl.getOrdersByUserEmail(email);
 
     reply.send(order);
@@ -312,7 +320,7 @@ fastify.get("/api/order/:id", async (request, reply) => {
 fastify.patch("/api/order", async function(request, reply) {
 
     const order = {
-        id : request.body.id,
+        id: request.body.id,
         userId: request.body.userId,
         orderName: request.body.orderName,
         status: request.body.status,
@@ -347,7 +355,7 @@ fastify.get("/api/order/", async (request, reply) => {
 
     } catch (error) {
 
-        reply.status(404).send({ error: true, errorMessage : error.toString() });
+        reply.status(404).send({ error: true, errorMessage: error.toString() });
     }
 });
 
@@ -370,9 +378,7 @@ fastify.get('/ticketFromUser/:email', async (request, reply) => {
 
 
 
-    reply.send(email);
-
-    if(!email) throw new Error('Email is needed');
+    if (!email) throw new Error('Email is needed');
 
     const ticket = await hubSpotAPI.getTicketsFromUserEmail(email);
 
@@ -388,7 +394,7 @@ fastify.get('/mytickets/', async (request, reply) => {
 
     reply.view("/src/pages/tickets.hbs", {
         tickets,
-        seo : seoCtrl.getUrlData('/mytickets/')
+        seo: seoCtrl.getUrlData('/mytickets/')
     });
 
 });
@@ -409,7 +415,7 @@ fastify.get('/mytickets/:id', async (request, reply) => {
     reply.view("/src/pages/ticket.hbs", {
         tickets,
         emailsInTicket,
-        seo : seoCtrl.getUrlData('/mytickets/')
+        seo: seoCtrl.getUrlData('/mytickets/')
     });
 
 });
@@ -447,7 +453,7 @@ fastify.get('/api/devices/:id', async (request, reply) => {
         "35730": {
             "brand": "Google",
             "model": "Pixel 3XL",
-            "image" : "https://static.fnac-static.com/multimedia/Images/FR/MDM/2c/bc/52/22199340/1520-1/tsp20231110173112/Smartphone-Google-Pixel-8-Pro-6-7-5G-Double-SIM-128-Go-Noir.jpg",
+            "image": "https://static.fnac-static.com/multimedia/Images/FR/MDM/2c/bc/52/22199340/1520-1/tsp20231110173112/Smartphone-Google-Pixel-8-Pro-6-7-5G-Double-SIM-128-Go-Noir.jpg",
             "releaseYear": 2018,
             "display": {
                 "type": "OLED",
@@ -499,7 +505,7 @@ fastify.get('/api/devices/:id', async (request, reply) => {
             "brand": "Apple",
             "model": "iPhone 12",
             "releaseYear": 2020,
-            "image" : "https://static.fnac-static.com/multimedia/Images/FR/MDM/c2/b2/bd/12432066/1540-1/tsp20231116133346/Apple-iPhone-12-6-1-64-Go-Double-SIM-5G-Noir.jpg",
+            "image": "https://static.fnac-static.com/multimedia/Images/FR/MDM/c2/b2/bd/12432066/1540-1/tsp20231116133346/Apple-iPhone-12-6-1-64-Go-Double-SIM-5G-Noir.jpg",
             "display": {
                 "type": "Super Retina XDR OLED",
                 "size": 6.1,
@@ -551,7 +557,7 @@ fastify.get('/api/devices/:id', async (request, reply) => {
             "brand": "Apple",
             "model": "iPhone 12",
             "releaseYear": 2020,
-            "image" : "https://static.fnac-static.com/multimedia/Images/FR/MDM/c2/b2/bd/12432066/1540-1/tsp20231116133346/Apple-iPhone-12-6-1-64-Go-Double-SIM-5G-Noir.jpg",
+            "image": "https://static.fnac-static.com/multimedia/Images/FR/MDM/c2/b2/bd/12432066/1540-1/tsp20231116133346/Apple-iPhone-12-6-1-64-Go-Double-SIM-5G-Noir.jpg",
             "display": {
                 "type": "Super Retina XDR OLED",
                 "size": 6.1,
@@ -609,26 +615,27 @@ fastify.get('/api/devices/:id', async (request, reply) => {
 fastify.get('/api/devices/replacement', async (request, reply) => {
 
     reply.send([{
-        label: `iPhone 13 Max`,
-        value: `1200€`,
-        initialIsChecked: true,
-        readonly: false,
-        description: `2 - 3 days`,
-      },
-      {
-        label: `Google Pixel 8 pro`,
-        value: `800€`,
-        initialIsChecked: false,
-        readonly: false,
-        description: `1 day`,
-      },
-      {
-        label: `Nokia 3310`,
-        value: `20€`,
-        initialIsChecked: false,
-        readonly: false,
-        description: `3 days`,
-      }])
+            label: `iPhone 13 Max`,
+            value: `1200€`,
+            initialIsChecked: true,
+            readonly: false,
+            description: `2 - 3 days`,
+        },
+        {
+            label: `Google Pixel 8 pro`,
+            value: `800€`,
+            initialIsChecked: false,
+            readonly: false,
+            description: `1 day`,
+        },
+        {
+            label: `Nokia 3310`,
+            value: `20€`,
+            initialIsChecked: false,
+            readonly: false,
+            description: `3 days`,
+        }
+    ])
 
 });
 
@@ -649,8 +656,8 @@ fastify.get('/api/devices/replacement', async (request, reply) => {
  */
 fastify.get('/my-parcel/', async (request, reply) => {
 
-    reply.view("/src/pages/my-parcel.hbs",{
-        seo : seoCtrl.getUrlData('/my-parcel/')
+    reply.view("/src/pages/my-parcel.hbs", {
+        seo: seoCtrl.getUrlData('/my-parcel/')
     });
 
 });
@@ -680,7 +687,7 @@ fastify.get("/api/parcelNumber/", async (request, reply) => {
 
 
 fastify.get("/hello", async (request, reply) => {
-;
+    ;
 
     const parcelNumber = {
         hello: 'my friend :)'

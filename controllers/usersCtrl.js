@@ -104,6 +104,34 @@ exports.getUserById = async (id) => {
 
 
 
+exports.getUserTickets = async (email) => {
+
+    if(!email) throw new Error('We need a valid email to get the data from HubSpot');
+
+    const responseEmailRequest = await hubSpotAPI.getContactIdFromEmail(email);
+
+    if (!responseEmailRequest) throw new Error('Bad response from the api after calling getContactIdFromEmail');
+
+    if (responseEmailRequest.total === 0) throw new Error('No user found for the email');
+
+
+    const { id, properties } = responseEmailRequest.results[0];
+
+    if (!id) throw new Error('No id found for the email ');
+
+    const { data } = await hubSpotAPI.getAssociatedTicketsFromContactId(id);
+
+    const ticketIds = data.results.map(r => {
+        return { id: r.toObjectId }
+    });
+
+    const response = await hubSpotAPI.getAllTicketsFromIds(ticketIds);
+
+    if (!response) throw new Error('Bad response from the api after trying to gett all the tickets with getAllTicketsFromIds');
+
+    return response.data.results;
+}
+
 /**
  * Add a new user to the system.
  *

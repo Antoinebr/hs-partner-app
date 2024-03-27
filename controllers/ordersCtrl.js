@@ -110,9 +110,13 @@ exports.getOrdersByUserId = async (id) => {
  */
 exports.getOrdersByUserEmail = async (email) => {
 
+
+
     if (!email) throw new Error(`We exepected an email in ordersCtrl exports.getOrdersByUserEmail(emil), we go ${email}`);
 
     let orders = await Orders.getOrdersByUserEmail(email);
+
+    
 
     if (!orders) {
         console.log(`No order found for userId : ${id}`);
@@ -143,7 +147,6 @@ exports.addOrder = async (order) => {
 
     const orderAdded = await Orders.insertOrder(order);
 
-
     try {
 
         const user = await Users.getUserById(order.userId);
@@ -159,21 +162,16 @@ exports.addOrder = async (order) => {
                 "amount": order.amount,
                 "dealname": order.orderName,
                 "pipeline": "default"
-            },
-            // association here doesn't work 
-            // "associations": [{
-            //     "to": {
-            //         "id": 8501
-            //     },
-            //     "type": "0-1"
-            // }
-            // ]
+            }
         }).catch(console.log)
 
         await hubSpotAPI.associateDealWithContact(deal.data.id, parseInt(results[0].id));
 
+        await Orders.updateOrderHsId(orderAdded.lastID,deal.data.id);
+
     } catch (error) {
         console.log(`Error when syncing the order with HubSpot`)
+        console.log(error);
     }
 
     return orderAdded;

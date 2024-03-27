@@ -56,14 +56,13 @@ exports.getOrderByUserId = async (userId) => {
 
 exports.getOrdersByUserEmail = async (email) => {
 
-
     const result = await db.all(/*SQL*/`
 
         SELECT *
         FROM  Users
         INNER JOIN Orders
         ON  Users.ID =  Orders.userId
-        WHERE Users.email = "${email}"
+        WHERE Users.email = $email
 
     `, {
         $email: email
@@ -113,6 +112,28 @@ exports.updateOrder = async (order) => {
         $status: order.status,
         $amount: order.amount,
         $id: order.id
+    });
+
+
+    return update;
+}
+
+
+exports.updateOrderHsId = async (orderId, hsObjectId) => {
+
+    const update = await db.run(/*SQL*/`
+    
+        UPDATE Orders 
+
+        SET 
+        
+        hs_object_id =  $hs_object_id
+
+        WHERE id = $id
+        
+        `, {
+        $hs_object_id: hsObjectId,
+        $id: orderId
     });
 
 
