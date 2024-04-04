@@ -20,7 +20,7 @@
     "handlebars": "^4.7.7",
     "point-of-view": "^5.0.0",
     "promised-sqlite3": "^1.2.0",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "5.0.0"
   },
   "engines": {
     "node": "12.x"

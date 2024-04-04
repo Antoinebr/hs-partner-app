@@ -222,8 +222,6 @@ exports.addContact = async (properties) => {
 
     const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts`;
 
-    console.log("🔥 addContact")
-
     return await axios.post(endpoint, properties, axiosConfig);
 };
 
@@ -288,8 +286,6 @@ exports.getAssociatedEmailsFromTicketId = async (id) => {
 
     const endpoint = `https://api.hubapi.com/crm/v4/objects/tickets/${id}/associations/emails`;
 
-    console.log(endpoint);
-
     return axios.get(endpoint, axiosConfig);
 }
 
@@ -297,8 +293,6 @@ exports.getAssociatedEmailsFromTicketId = async (id) => {
 exports.getAssociatedTicketsFromContactId = async (id) => {
 
     const endpoint = `https://api.hubapi.com/crm/v4/objects/contacts/${id}/associations/tickets`;
-
-    console.log(endpoint);
 
     return axios.get(endpoint, axiosConfig);
 }
@@ -347,7 +341,9 @@ exports.getAssociatedTicketsFromContactId = async (id) => {
 
 
 exports.getAllEmailsFromTicketId = async (ticketId) => {
+
     let fetchedEmails = []; // Initialize fetchedEmails as an empty array
+    
     try {
         const initialEmailResponse = await axios({
             method: 'get',
@@ -359,12 +355,8 @@ exports.getAllEmailsFromTicketId = async (ticketId) => {
             },
         });
 
-        //console.log("Initial Email Response:", initialEmailResponse.data);
-
         // Extract email ID's from the initial email response
         const emailIds = initialEmailResponse.data.results;
-
-        //console.log("Email IDs:", emailIds);
 
         const emailIdInputs = emailIds.map(email => ({
             id: email.toObjectId.toString()
