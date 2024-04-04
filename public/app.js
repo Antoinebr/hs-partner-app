@@ -91,7 +91,8 @@ document.querySelector('#addBtn')?.addEventListener('click', async e => {
 
     if(res.status === 403) alert(res.statusText)
 
-    if(res.status !== 403) window.location.replace(`/editUser/${email}`);
+ 
+    if(res.status !== 403) window.location.replace(`/users`);
 
 
 });
