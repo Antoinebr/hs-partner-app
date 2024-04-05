@@ -8,10 +8,12 @@ COPY . .
 # RUN apk add --no-cache make gcc g++ python
 
 RUN apk update && apk upgrade
+RUN apk add --no-cache sqlite
 
 RUN apk add curl
 
 RUN npm install
+RUN npm rebuild
 
 EXPOSE 3001
 
