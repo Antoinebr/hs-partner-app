@@ -1,7 +1,6 @@
-const { PromisedDatabase } = require("promised-sqlite3"); // import the class
+const { PromisedDatabase } = require("../apis/promised-sqlite3"); // import the class
 const db = new PromisedDatabase(); // create a instance of PromisedDatabase
 db.open("./db/db.sqlite");
-
 
 
 /**
