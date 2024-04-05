@@ -1,4 +1,5 @@
-FROM mhart/alpine-node
+FROM arm64v8/node:16-alpine
+
 
 WORKDIR /app
 COPY . .
@@ -6,9 +7,12 @@ COPY . .
 # If you have native dependencies, you'll need extra tools
 # RUN apk add --no-cache make gcc g++ python
 
+RUN apk update && apk upgrade
+
 RUN apk add curl
 
 RUN npm install
 
-EXPOSE 3000
-CMD ["node", "server.js"]
+EXPOSE 3001
+
+CMD [ "node", "/app/server.js" ]
