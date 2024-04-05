@@ -1,11 +1,6 @@
 # deploy
 
 
-
-- send everything to GitHub
-
-On the server ovh3 : 
-
 ```
 Make update
 ```
@@ -16,7 +11,16 @@ Make update
 - ``` docker-compose up -d ```
 
 
-### ServiceHub 
+## Database sync 
 
-It's possible to identify the connected user by sending his email address to the HubSpot API and get a token back : 
-https://developers.hubspot.com/docs/api/conversation/visitor-identification
+```
+docker stop <id>
+``` 
+
+```
+bash syncRemoteDbtoLocal.sh
+```
+ 
+```
+make runprod  
+```
